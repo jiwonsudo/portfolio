@@ -10,23 +10,84 @@ header {
   z-index: 2;
 }
 
-#topLogo img {
-  width: 40px;
-  margin-right: 10px;
-  margin-top: 10px;
+body {
+  font-family: Noto Sans KR;
 }
 
-#about {
-  font-family: Noto Sans KR;
+#topLogo img {
+  width: 40px;
+  margin-right: 20px;
+  margin-top: 20px;
 }
 
 body section {
   margin: 20px 50px;
 }
 
-#title_greet {
-  font-size: 30pt;
+#title_greet h1{
+  font-size: 40pt;
   font-weight: 500;
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
+#profileimage img {
+  width: 250px;
+  border-radius: 15%;
+  float: right;
+  margin-top: 60px;
+}
+
+#projects h1 {
+  font-size: 30pt;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+#projects h2 {
+  font-size: 15pt;
+  font-weight: 500;
+  margin-top: 5px;
+  color: rgb(172, 172, 172);
+}
+
+#teamprojects {
+  margin-top: 450px;
+}
+
+#teamprojects div {
+  margin: 20px auto;
+}
+
+#teamprojects div h1 {
+  font-size: 20pt;
+  margin: 200px auto 10px;
+}
+
+#teamprojects div h2 {
+  font-size: 10pt;
+  margin: 0 auto;
+}
+
+#teamprojects div p {
+  font-size: 10pt;
+  margin: 30px auto ;
+}
+
+#teamprojects img {
+  max-width: 40%;
+}
+
+.images {
+}
+
+
+
+
+#toyprojects {
+  margin-top: 450px;
+  float: right;
+}
+
+#toyprojects h2{
+  float: right;
+}
