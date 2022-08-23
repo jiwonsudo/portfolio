@@ -87,19 +87,10 @@ body section {
 }
 
 #maechat img {
-  right: 0;
-  width: 40%;
+  right: 50px;
+  width: 50%;
+  border-radius: 20px;
   position: absolute;
-}
-
-#maechat img:first-child {
-  width: 15%;
-  border-radius: 20px;
-}
-
-#maechat img:nth-child(2) {
-  width: 40%;
-  border-radius: 20px;
 }
 
 
