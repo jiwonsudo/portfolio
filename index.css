@@ -32,7 +32,7 @@ body section {
 
 #profileimage img {
   width: 250px;
-  border-radius: 15%;
+  border-radius: 30px;
   float: right;
   margin-top: 60px;
 }
@@ -55,12 +55,12 @@ body section {
 }
 
 #teamprojects div {
-  margin: 20px auto;
+  margin: 80px auto;
 }
 
 #teamprojects div h1 {
   font-size: 20pt;
-  margin: 200px auto 10px;
+  margin: 10px auto;
 }
 
 #teamprojects div h2 {
@@ -74,10 +74,32 @@ body section {
 }
 
 #teamprojects img {
-  max-width: 40%;
+  border-radius: 30px;
+  max-width: 500px;
 }
 
-.images {
+#maechat div:first-child {
+  float: left;
+}
+
+#maechat div:last-child {
+  float: right;
+}
+
+#maechat img {
+  right: 0;
+  width: 40%;
+  position: absolute;
+}
+
+#maechat img:first-child {
+  width: 15%;
+  border-radius: 20px;
+}
+
+#maechat img:nth-child(2) {
+  width: 40%;
+  border-radius: 20px;
 }
 
 
