@@ -78,15 +78,16 @@ body section {
   max-width: 500px;
 }
 
-#maechat div:first-child {
+#project div:first-child {
   float: left;
 }
 
-#maechat div:last-child {
+#project div:last-child {
   float: right;
 }
 
-#maechat img {
+#project img {
+  margin-top: 20px;
   right: 50px;
   width: 50%;
   border-radius: 20px;
@@ -103,4 +104,29 @@ body section {
 
 #toyprojects h2{
   float: right;
+}
+
+@media ( max-width: 1000px ) {
+  #titlegreet h1 {
+    font-size: 25pt;
+    font-weight: 400;
+  }
+
+  #project img {
+    width: 40%;
+  }
+}
+
+@media ( max-width: 800px ) {
+  #project div {
+    float: none;
+  }
+  #project img {
+    float: none;
+    right: auto;
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+
+  }
 }
