@@ -22,12 +22,16 @@ body {
 
 body section {
   margin: 20px 50px;
+  
 }
 
-#title_greet h1{
+#about {
+  margin-top: 130px;
+}
+
+#titlegreet h1{
   font-size: 40pt;
   font-weight: 500;
-  margin-top: 150px;
 }
 
 #profileimage img {
@@ -35,6 +39,12 @@ body section {
   border-radius: 30px;
   float: right;
   margin-top: 60px;
+}
+
+#introduction {
+  margin-top: 500px;
+  font-size: 13pt;
+  font-weight: 300;
 }
 
 #projects h1 {
@@ -51,7 +61,8 @@ body section {
 }
 
 #teamprojects {
-  margin-top: 450px;
+  float: left;
+  margin-top: 300px;
 }
 
 #teamprojects div {
@@ -59,7 +70,7 @@ body section {
 }
 
 #teamprojects div h1 {
-  font-size: 20pt;
+  font-size: 22pt;
   margin: 10px auto;
 }
 
@@ -69,7 +80,7 @@ body section {
 }
 
 #teamprojects div p {
-  font-size: 10pt;
+  font-size: 11pt;
   margin: 30px auto ;
 }
 
@@ -78,12 +89,9 @@ body section {
   max-width: 500px;
 }
 
-#project div:first-child {
-  float: left;
-}
-
-#project div:last-child {
+#toyprojects {
   float: right;
+  margin-top: 500px;
 }
 
 #project img {
@@ -93,7 +101,6 @@ body section {
   border-radius: 20px;
   position: absolute;
 }
-
 
 
 
