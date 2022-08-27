@@ -29,20 +29,25 @@ body section {
   margin-top: 130px;
 }
 
-#titlegreet h1{
+#about h1 {
   font-size: 40pt;
   font-weight: 500;
+  animation: slide 2s;
 }
 
-#profileimage img {
-  width: 250px;
+#about img {
+  width: 300px;
   border-radius: 30px;
-  float: right;
   margin-top: 60px;
+  position: absolute;
+  right: 50px;
 }
 
-#introduction {
+#about p:nth-child(3) {
   margin-top: 500px;
+}
+
+#about p {
   font-size: 13pt;
   font-weight: 300;
 }
@@ -50,6 +55,7 @@ body section {
 #projects h1 {
   font-size: 30pt;
   font-weight: 500;
+  margin-top: 300px;
   margin-bottom: 0;
 }
 
@@ -60,13 +66,8 @@ body section {
   color: rgb(172, 172, 172);
 }
 
-#teamprojects {
-  float: left;
-  margin-top: 300px;
-}
-
 #teamprojects div {
-  margin: 80px auto;
+  margin: 180px auto;
 }
 
 #teamprojects div h1 {
@@ -87,30 +88,20 @@ body section {
 #teamprojects img {
   border-radius: 30px;
   max-width: 500px;
-}
-
-#toyprojects {
-  /* float: right; */
-  margin-top: 500px;
-}
-
-#project img {
-  margin-top: 20px;
-  right: 50px;
-  width: 50%;
-  border-radius: 20px;
   position: absolute;
+  right: 50px;
+  margin-top: -300px;
 }
 
 
 
 #toyprojects {
-  margin-top: 450px;
-  float: right;
+  margin-top: 300px;
 }
 
-#toyprojects h2{
-  float: right;
+#toyprojects h1, #toyprojects h2 {
+  position: absolute;
+  right: 50px;
 }
 
 @media ( max-width: 1000px ) {
@@ -136,4 +127,14 @@ body section {
     margin: 0 auto;
 
   }
+}
+
+@keyframes slide {
+  from {
+    left: -100px;
+  }
+  to {
+    left: 500px;
+  }
+  
 }
