@@ -1,75 +1,40 @@
-# React + TypeScript + Vite
+# Jiwon | 지원 — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+기획의 의도와 사용자의 감각이 같은 화면 안에서 만나는 경험을 만드는 프론트엔드 개발자 지원의 포트폴리오.
 
-Currently, two official plugins are available:
+3D 갤러리(React Three Fiber)를 스크롤로 걷는 인터랙티브 포트폴리오입니다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- React 19 + TypeScript
+- Vite
+- Tailwind CSS v4
+- three.js / @react-three/fiber / @react-three/drei
+- @chenglou/pretext (물고기 형태를 따라 흐르는 About 텍스트 레이아웃)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Structure
 
-## Expanding the ESLint configuration
+- `src/components/Hero.tsx` — 랜딩 히어로
+- `src/components/AboutOverlay.tsx` — 영상 속 물고기 마스크를 피해 흐르는 소개 텍스트
+- `src/components/Exhibit.tsx` — 스크롤로 이동하는 3D 갤러리 (WebGL 미지원 시 CSS 폴백)
+- `src/components/ExhibitItem.tsx` — 개별 작품 액자
+- `src/components/StackContact.tsx` — 스택 & 연락처
+- `src/utils/`, `src/hooks/` — 텍스트 흐름 / 크기 측정 로직
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Scripts
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+```bash
+pnpm dev            # 개발 서버
+pnpm build          # 타입 체크 + 프로덕션 빌드
+pnpm preview        # 빌드 미리보기
+pnpm lint           # ESLint
+pnpm format         # Prettier
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## TODO (콘텐츠 채우기)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+`src/App.tsx`의 `exhibits`와 `src/components/StackContact.tsx`에 실제 값으로 교체 필요:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
-```
-
-# portfolio
+- 프로젝트 `demoUrl` / `githubUrl` (현재 예시 링크)
+- 이메일 `hello@example.com`
+- GitHub / LinkedIn 링크

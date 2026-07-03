@@ -27,7 +27,7 @@ export type TextSpec = {
 };
 
 export const aboutText =
-  '기획자의 상상력을 온전한 유저 경험으로 시각화하는 프론트엔드 개발자입니다. 제품의 의도, 사용자의 맥락, 인터랙션의 감정을 함께 읽고 화면으로 번역합니다. I build interfaces that help product teams move from idea to believable experience. ';
+  '미려한 유저 경험을 디자인하는 프론트엔드 엔지니어가 되기 위해 노력하는 주니어 개발자입니다. 간단한 아이디어를 확장하고, 여러 개발 도구로 구현하여 효과적으로 실력을 기르려 노력합니다. I am a junior developer working hard to become a front-end engineer who designs beautiful user experiences. ';
 
 export function getAboutTextSpec(width: number): TextSpec {
   const isMobile = width < 720;
@@ -44,7 +44,8 @@ export function getAboutTextSpec(width: number): TextSpec {
 }
 
 export function prepareAboutText(font: string): PreparedTextWithSegments {
-  return prepareWithSegments(aboutText.repeat(14), font, {
+  // 화면을 빼곡히 채우지 않도록 반복을 줄여, 물고기와 여백이 살아나게 한다.
+  return prepareWithSegments(aboutText.repeat(2), font, {
     wordBreak: 'keep-all',
   });
 }
