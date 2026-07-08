@@ -1,5 +1,5 @@
 import Footer from '../components/Footer';
-import { categoryLabels, projectsByCategory } from '../data/projects';
+import { categoryLabels, projectList } from '../data/projects';
 import type { Project } from '../types';
 
 function ProjectCard({ project }: { project: Project }) {
@@ -18,7 +18,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       <div className="flex flex-1 flex-col gap-3 p-6">
         <p className="text-[11px] font-extrabold tracking-wide uppercase text-[#9e7435]">
-          {project.number} · {categoryLabels[project.category]} · {project.period}
+          {categoryLabels[project.category]} · {project.period}
         </p>
         <div>
           <h3 className="text-xl leading-tight font-extrabold text-[#181512]">
@@ -85,23 +85,9 @@ export default function ProjectsPage() {
           실력을 기르려 노력합니다.
         </p>
 
-        <div className="mt-16 grid gap-20">
-          {projectsByCategory.map((group) => (
-            <div key={group.category}>
-              <div className="mb-8 flex items-baseline gap-3 border-b border-black/10 pb-4">
-                <h2 className="text-2xl font-extrabold text-[#181512]">
-                  {group.label}
-                </h2>
-                <span className="text-sm font-bold text-[#9c9284]">
-                  {group.items.length}
-                </span>
-              </div>
-              <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {group.items.map((project) => (
-                  <ProjectCard key={project.slug} project={project} />
-                ))}
-              </div>
-            </div>
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {projectList.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </section>

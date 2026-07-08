@@ -197,30 +197,11 @@ function GalleryLabels({
       className="pointer-events-none absolute inset-0 z-20 transition-opacity duration-500"
       style={{ opacity: visible ? 1 : 0 }}
     >
-      {/* 우상단 진행 표시 */}
-      <div className="absolute top-6 right-6 text-right font-extrabold text-white/80 md:top-8 md:right-10">
-        <span className="text-2xl md:text-3xl" style={{ color: accent }}>
-          {exhibit.number}
-        </span>
-        <span className="text-sm text-white/40">
-          {' '}
-          / {String(exhibits.length).padStart(2, '0')}
-        </span>
-      </div>
-
       {/* 활성 작품 카드 (한 장만, 고정 위치, 크로스페이드) */}
       <article
         className="label-in group pointer-events-auto absolute bottom-[9vh] left-[6vw] w-[min(84vw,384px)] overflow-hidden rounded-2xl border border-white/15 bg-white/8 p-5 text-white shadow-[0_24px_60px_rgba(0,0,0,0.4)] backdrop-blur-xl md:bottom-[12vh] md:left-[8vw]"
-        key={exhibit.number}
+        key={exhibit.title}
       >
-        <span
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-6 -right-2 text-[7rem] leading-none font-black opacity-15 select-none"
-          style={{ color: accent }}
-        >
-          {exhibit.number}
-        </span>
-
         <p
           className="mb-2 text-[10px] font-extrabold tracking-wide uppercase"
           style={{ color: accent }}
