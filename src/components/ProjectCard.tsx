@@ -72,7 +72,7 @@ export default function ProjectCard({
                 key={cat}
                 style={{
                   backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
-                  color: `color-mix(in srgb, ${c} 78%, black)`,
+                  color: `color-mix(in srgb, ${c} 48%, black)`,
                 }}
               >
                 {lang === 'en' ? categoryMeta[cat].label : categoryMeta[cat].labelKo}
@@ -113,7 +113,7 @@ export default function ProjectCard({
         </p>
         <span
           className="mt-auto pt-2 text-[11px] font-extrabold uppercase"
-          style={{ color: accent }}
+          style={{ color: `color-mix(in srgb, ${accent} 48%, black)` }}
         >
           {t('common.viewDetail')}
         </span>

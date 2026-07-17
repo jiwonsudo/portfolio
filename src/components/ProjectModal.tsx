@@ -157,7 +157,7 @@ export default function ProjectModal({
                     key={cat}
                     style={{
                       backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
-                      color: `color-mix(in srgb, ${c} 78%, black)`,
+                      color: `color-mix(in srgb, ${c} 48%, black)`,
                     }}
                   >
                     {lang === 'en'
@@ -191,7 +191,7 @@ export default function ProjectModal({
               >
                 <p
                   className="text-[10px] font-extrabold tracking-[0.15em] uppercase"
-                  style={{ color: accent }}
+                  style={{ color: `color-mix(in srgb, ${accent} 48%, black)` }}
                 >
                   {t('modal.contribution')}
                 </p>
@@ -227,7 +227,7 @@ export default function ProjectModal({
                     className="underline underline-offset-4 transition-opacity hover:opacity-60"
                     href={project.demoUrl}
                     rel="noreferrer"
-                    style={{ color: accent }}
+                    style={{ color: `color-mix(in srgb, ${accent} 48%, black)` }}
                     target="_blank"
                   >
                     Demo ↗

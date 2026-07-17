@@ -262,7 +262,7 @@ export default function HomePage() {
                         key={cat}
                         style={{
                           backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
-                          color: `color-mix(in srgb, ${c} 78%, black)`,
+                          color: `color-mix(in srgb, ${c} 48%, black)`,
                         }}
                       >
                         {lang === 'en'
