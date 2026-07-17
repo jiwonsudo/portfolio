@@ -44,6 +44,16 @@ const STRINGS = {
     'common.featured': 'Featured',
     'common.skip': '본문으로 건너뛰기',
     'common.resume': '이력서',
+    'contact.cta': '연락하기',
+    'contact.email': '이메일 보내기',
+    'contact.footerTitle': '새로운 기회를 찾고 있어요 👋',
+    'contact.ready':
+      '새로운 경험을 좋아해요. 재밌는 일이 있다면 편하게 연락 주세요!',
+    'contact.quoteMeaning':
+      '아는 것은 좋아하는 것만, 좋아하는 것은 즐기는 것만 못하다',
+    'contact.quoteAuthor': '공자',
+    'about.photosTitle': '이런 사람이에요',
+    'about.photosHint': '눌러서 사진 더보기',
     'modal.contribution': '핵심 기여',
     'notfound.msg': '길을 잃으셨나요? 집으로 모셔다드릴게요.',
     'notfound.home': '홈으로',
@@ -82,6 +92,16 @@ const STRINGS = {
     'common.featured': 'Featured',
     'common.skip': 'Skip to content',
     'common.resume': 'Resume',
+    'contact.cta': 'Get in touch',
+    'contact.email': 'Email me',
+    'contact.footerTitle': 'Open to new adventures 👋',
+    'contact.ready':
+      'I love new experiences — got something fun? Feel free to reach out!',
+    'contact.quoteMeaning':
+      'Knowing it is less than loving it; loving it is less than delighting in it',
+    'contact.quoteAuthor': 'Confucius',
+    'about.photosTitle': 'A bit more of me',
+    'about.photosHint': 'Tap to see more photos',
     'modal.contribution': 'My contribution',
     'notfound.msg': "Lost in space? Let's get you back home.",
     'notfound.home': 'Back home',

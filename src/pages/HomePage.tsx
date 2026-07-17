@@ -178,33 +178,41 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* 연락 / 외부 링크 */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-bold text-neutral-500 text-shadow-none">
-            {[
-              ...(profile.resume
-                ? [
-                    {
-                      label: t('common.resume'),
-                      href: profile.resume,
-                      ext: true,
-                    },
-                  ]
-                : []),
-              { label: 'GitHub', href: profile.github, ext: true },
-              { label: 'LinkedIn', href: profile.linkedin, ext: true },
-              { label: 'Blog', href: profile.blog, ext: true },
-              { label: 'Email', href: `mailto:${profile.email}`, ext: false },
-            ].map((s) => (
-              <a
-                className="underline-offset-4 transition-colors hover:text-neutral-900 hover:underline"
-                href={s.href}
-                key={s.label}
-                rel={s.ext ? 'noreferrer' : undefined}
-                target={s.ext ? '_blank' : undefined}
-              >
-                {s.label}
-              </a>
-            ))}
+          {/* 연락 / 외부 링크 — 이메일은 accent 톤의 작은 pill로 구분 */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-shadow-none">
+            <a
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#6366f1]/30 bg-[#6366f1]/10 px-4 py-2 text-sm font-bold text-[#4f46e5] transition-colors hover:border-[#6366f1]/50 hover:bg-[#6366f1]/20"
+              href={`mailto:${profile.email}`}
+            >
+              <span aria-hidden>✉</span>
+              {t('contact.cta')}
+            </a>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold text-neutral-500">
+              {[
+                ...(profile.resume
+                  ? [
+                      {
+                        label: t('common.resume'),
+                        href: profile.resume,
+                        ext: true,
+                      },
+                    ]
+                  : []),
+                { label: 'GitHub', href: profile.github, ext: true },
+                { label: 'LinkedIn', href: profile.linkedin, ext: true },
+                { label: 'Blog', href: profile.blog, ext: true },
+              ].map((s) => (
+                <a
+                  className="underline-offset-4 transition-colors hover:text-neutral-900 hover:underline"
+                  href={s.href}
+                  key={s.label}
+                  rel={s.ext ? 'noreferrer' : undefined}
+                  target={s.ext ? '_blank' : undefined}
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -347,6 +355,31 @@ export default function HomePage() {
           </Reveal>
         </section>
       ) : null}
+
+      {/* ── 마무리 outro ── */}
+      <section className="relative px-6 pt-8 pb-24 text-center md:pb-32">
+        <Reveal className="mx-auto max-w-2xl">
+          <h2 className="text-[clamp(1.8rem,5vw,3rem)] leading-tight font-extrabold text-neutral-900">
+            {t('contact.footerTitle')}
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-neutral-600 break-keep md:text-lg">
+            {t('contact.ready')}
+          </p>
+          <a
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
+            href={`mailto:${profile.email}`}
+          >
+            <span aria-hidden>✉</span>
+            {t('contact.email')}
+          </a>
+          <p className="mt-10 text-sm text-neutral-400 break-keep">
+            {profile.quote}
+          </p>
+          <p className="mt-1 text-sm text-neutral-400 break-keep">
+            {t('contact.quoteMeaning')} — {t('contact.quoteAuthor')}
+          </p>
+        </Reveal>
+      </section>
 
       <Footer />
 

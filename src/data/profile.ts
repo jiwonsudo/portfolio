@@ -119,11 +119,6 @@ export const experiences: TimelineEntry[] = [
     titleEn: 'High school SW Intensive Education Course',
   },
   {
-    period: 'Mar 2022 – Dec 2022',
-    title: '매천고등학교 전교 학생회장',
-    titleEn: 'Student Body President · Maecheon High School',
-  },
-  {
     period: 'Dec 2020',
     title: '프로그래밍 시작',
     titleEn: 'Started Programming',

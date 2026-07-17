@@ -1,9 +1,19 @@
 @import 'tailwindcss';
 
+/* Pretendard 자체 호스팅 — 전 기기/브라우저 동일 렌더링(라틴+한글 한 벌).
+   variable 폰트 1개로 모든 weight 커버. swap으로 렌더 블로킹 없음. */
+@font-face {
+  font-family: 'Pretendard Variable';
+  src: url('./assets/fonts/PretendardVariable.woff2') format('woff2-variations');
+  font-weight: 45 920;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', sans-serif;
+    'Pretendard Variable', Pretendard, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 html {

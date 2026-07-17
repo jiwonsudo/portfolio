@@ -3,7 +3,7 @@
 //   - 이미 같은 이름의 .webp가 있으면 건너뜀(멱등)
 //   - 투명도(alpha)는 그대로 보존
 //
-// 사용:  pnpm images:webp            (대상 projects, quality 82)
+// 사용:  pnpm images:webp            (기본 대상 projects + profile, quality 82)
 //        pnpm images:webp mockups    (대상 mockups)
 //        pnpm images:webp projects 88 (quality 88)
 
@@ -13,9 +13,10 @@ import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
-const TARGET = process.argv[2] || 'projects';
+// 인자로 대상을 주면 그것만, 없으면 기본 대상들을 모두 처리
+const DEFAULT_TARGETS = ['projects', 'profile'];
+const TARGETS = process.argv[2] ? [process.argv[2]] : DEFAULT_TARGETS;
 const QUALITY = Number(process.argv[3]) || 82;
-const DIR = join(ROOT, 'src', 'assets', TARGET);
 const SRC_EXTS = new Set(['.png', '.jpg', '.jpeg']);
 
 async function* walk(dir) {
@@ -35,13 +36,15 @@ const exists = (p) =>
     () => false,
   );
 
-async function main() {
-  let converted = 0;
-  let before = 0;
-  let after = 0;
-  console.log(`\n🖼  WebP 변환 — src/assets/${TARGET} (quality ${QUALITY})\n`);
+async function convertTarget(target, totals) {
+  const dir = join(ROOT, 'src', 'assets', target);
+  if (!(await exists(dir))) {
+    console.log(`\n🖼  src/assets/${target} — 폴더 없음, 건너뜀`);
+    return;
+  }
+  console.log(`\n🖼  WebP 변환 — src/assets/${target} (quality ${QUALITY})\n`);
 
-  for await (const file of walk(DIR)) {
+  for await (const file of walk(dir)) {
     const ext = extname(file).toLowerCase();
     if (!SRC_EXTS.has(ext)) continue;
 
@@ -56,17 +59,23 @@ async function main() {
     await writeFile(out, webp);
     await unlink(file); // 원본 삭제 (glob이 webp만 잡도록)
 
-    before += buf.length;
-    after += webp.length;
-    converted++;
+    totals.before += buf.length;
+    totals.after += webp.length;
+    totals.converted++;
     const pct = Math.round((1 - webp.length / buf.length) * 100);
     console.log(
       `  ✅ ${file.replace(ROOT + '/', '')} → .webp  ${fmt(buf.length)} → ${fmt(webp.length)} (-${pct}%)`,
     );
   }
+}
 
+async function main() {
+  const totals = { converted: 0, before: 0, after: 0 };
+  for (const target of TARGETS) {
+    await convertTarget(target, totals);
+  }
   console.log(
-    `\n완료: ${converted}개 변환 · ${fmt(before)} → ${fmt(after)} (${fmt(before - after)} 절약)\n`,
+    `\n완료: ${totals.converted}개 변환 · ${fmt(totals.before)} → ${fmt(totals.after)} (${fmt(totals.before - totals.after)} 절약)\n`,
   );
 }
 

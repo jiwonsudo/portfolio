@@ -11,13 +11,13 @@ import {
 } from '../data/profile';
 import { techCategoryOrder, techMeta } from '../data/techMeta';
 import { useLang } from '../i18n';
+import ProfileAvatar from '../components/ProfileAvatar';
 
 // Footer·Home과 동일한 순서로 통일
 const socials = [
   { label: 'GitHub', href: profile.github },
   { label: 'LinkedIn', href: profile.linkedin },
   { label: 'Blog', href: profile.blog },
-  { label: 'Email', href: `mailto:${profile.email}` },
 ];
 
 export default function AboutPage() {
@@ -55,27 +55,45 @@ export default function AboutPage() {
       </div>
 
       <section className="relative mx-auto w-full max-w-5xl px-5 pt-32 pb-20 md:px-10 md:pt-40">
-        <p className="fade-up text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
-          {t('about.label')}
-        </p>
-        <h1 className="fade-up fade-up-1 mt-4 text-[clamp(2.6rem,8vw,5rem)] leading-none font-extrabold">
-          <span className="text-neutral-900">
-            {lang === 'en' ? profile.name : profile.nameKo}
-          </span>
-          <span className="text-[#8a8a8a]">
-            {' · '}
-            {lang === 'en' ? profile.nameKo : profile.name}
-          </span>
-        </h1>
-        <p className="fade-up fade-up-2 mt-6 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep">
-          {lang === 'en' ? profile.introEn : profile.intro}
-        </p>
+        <div className="flex flex-col gap-7 md:flex-row md:items-start md:gap-10">
+          <ProfileAvatar alt={lang === 'en' ? profile.name : profile.nameKo} />
+          <div className="min-w-0 flex-1">
+            <p className="fade-up text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+              {t('about.label')}
+            </p>
+            <h1 className="fade-up fade-up-1 mt-4 text-[clamp(2.6rem,8vw,5rem)] leading-none font-extrabold">
+              <span className="text-neutral-900">
+                {lang === 'en' ? profile.name : profile.nameKo}
+              </span>
+              <span className="text-[#8a8a8a]">
+                {' · '}
+                {lang === 'en' ? profile.nameKo : profile.name}
+              </span>
+            </h1>
+            <p className="fade-up fade-up-2 mt-6 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep">
+              {lang === 'en' ? profile.introEn : profile.intro}
+            </p>
+          </div>
+        </div>
 
-        {/* 연락 / 외부 링크 */}
-        <div className="fade-up fade-up-2 mt-7 flex flex-wrap gap-2.5">
+        {/* 연락 / 외부 링크 — 이메일을 대표 CTA로 강조 */}
+        <div className="fade-up fade-up-2 mt-7 flex flex-wrap items-center gap-2.5">
+          <a
+            className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white transition-transform duration-200 hover:scale-105"
+            href={`mailto:${profile.email}`}
+          >
+            <span aria-hidden>✉</span>
+            {t('contact.email')}
+            <span
+              aria-hidden
+              className="transition-transform group-hover:translate-x-0.5"
+            >
+              →
+            </span>
+          </a>
           {profile.resume ? (
             <a
-              className="rounded-full bg-neutral-900 px-5 py-2 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+              className="rounded-full border border-neutral-300 bg-white/70 px-5 py-2.5 text-sm font-bold text-neutral-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
               href={profile.resume}
               rel="noreferrer"
               target="_blank"
