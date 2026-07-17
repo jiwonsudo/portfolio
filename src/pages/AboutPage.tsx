@@ -1,42 +1,44 @@
 import Footer from '../components/Footer';
+import Highlights from '../components/Highlights';
 import Timeline from '../components/Timeline';
 import { projectList } from '../data/projects';
-import { awards, educations, experiences, profile } from '../data/profile';
+import {
+  awards,
+  credentials,
+  educations,
+  experiences,
+  profile,
+} from '../data/profile';
 import { techCategoryOrder, techMeta } from '../data/techMeta';
+import { useLang } from '../i18n';
 
-const baseStacks = [
-  'React',
-  'TypeScript',
-  'JavaScript',
-  'Swift',
-  'Python',
-  'Tailwind CSS',
-  'Express.js',
-  'R3F',
-  'Three.js',
-  'Supabase',
-  'Vercel',
-  'Cloudflare Tunnel',
+// Footer·Home과 동일한 순서로 통일
+const socials = [
+  { label: 'GitHub', href: profile.github },
+  { label: 'LinkedIn', href: profile.linkedin },
+  { label: 'Blog', href: profile.blog },
+  { label: 'Email', href: `mailto:${profile.email}` },
 ];
 
-// Tech & Tools 목록에서 제외할 스택 (프로젝트 데이터엔 남겨 둠)
-const excludedStacks = new Set(['Django', 'Spring']);
-
 export default function AboutPage() {
-  const stacks = Array.from(
-    new Set([
-      ...baseStacks,
-      ...projectList.flatMap((project) => project.stack),
-    ]),
-  ).filter((stack) => !excludedStacks.has(stack));
+  const { lang, t } = useLang();
 
-  // 용도(category)별로 묶고, 정의된 순서대로 노출한다.
-  const groups = techCategoryOrder
+  // Tech & Tools는 프로젝트에서 실제 쓰인 스택을 자동으로 모은다 (추가 시 자동 반영).
+  const stacks = Array.from(
+    new Set(projectList.flatMap((project) => project.stack)),
+  );
+
+  // 용도(category)별로 묶고, techMeta에 없는 스택은 '기타' 그룹으로 모은다.
+  const grouped = techCategoryOrder
     .map((category) => ({
-      category,
+      category: category as string,
       items: stacks.filter((stack) => techMeta[stack]?.category === category),
     }))
     .filter((group) => group.items.length > 0);
+  const etc = stacks.filter((stack) => !techMeta[stack]);
+  const groups = etc.length
+    ? [...grouped, { category: '기타', items: etc }]
+    : grouped;
 
   return (
     <main className="relative min-h-svh overflow-hidden bg-white text-neutral-900">
@@ -53,55 +55,138 @@ export default function AboutPage() {
       </div>
 
       <section className="relative mx-auto w-full max-w-5xl px-5 pt-32 pb-20 md:px-10 md:pt-40">
-        <p className="fade-up text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-400">
-          About
+        <p className="fade-up text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+          {t('about.label')}
         </p>
         <h1 className="fade-up fade-up-1 mt-4 text-[clamp(2.6rem,8vw,5rem)] leading-none font-extrabold">
-          <span className="text-neutral-900">{profile.name}</span>
-          <span className="text-neutral-300"> · {profile.nameKo}</span>
+          <span className="text-neutral-900">
+            {lang === 'en' ? profile.name : profile.nameKo}
+          </span>
+          <span className="text-neutral-400">
+            {' · '}
+            {lang === 'en' ? profile.nameKo : profile.name}
+          </span>
         </h1>
-        <p className="fade-up fade-up-2 mt-6 max-w-2xl text-base leading-relaxed text-neutral-500 md:text-lg break-keep">
-          미려한 유저 경험을 디자인하는 프론트엔드 엔지니어가 되기 위해 노력하는
-          개발자입니다. 기획의 의도와 사용자의 감각이 같은 화면 안에서 만나는
-          경험을 만듭니다.
+        <p className="fade-up fade-up-2 mt-6 max-w-2xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep">
+          {lang === 'en' ? profile.introEn : profile.intro}
         </p>
 
-        <div className="fade-up fade-up-3 mt-20 grid gap-5 md:grid-cols-2">
+        {/* 연락 / 외부 링크 */}
+        <div className="fade-up fade-up-2 mt-7 flex flex-wrap gap-2.5">
+          {profile.resume ? (
+            <a
+              className="rounded-full bg-neutral-900 px-5 py-2 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+              href={profile.resume}
+              rel="noreferrer"
+              target="_blank"
+            >
+              {t('common.resume')} ↗
+            </a>
+          ) : null}
+          {socials.map((s) => (
+            <a
+              className="rounded-full border border-neutral-300 bg-white/70 px-5 py-2 text-sm font-bold text-neutral-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
+              href={s.href}
+              key={s.label}
+              rel="noreferrer"
+              target={s.href.startsWith('mailto:') ? undefined : '_blank'}
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
+
+        {/* 성과 하이라이트 */}
+        <Highlights className="fade-up fade-up-3 mt-12" />
+
+        <div className="fade-up fade-up-3 mt-16 grid gap-5 md:grid-cols-2">
           <div className="panel">
             <Timeline
               accent="#6366f1"
               entries={experiences}
-              label="Experience"
+              label={t('section.experience')}
             />
           </div>
           <div className="panel">
-            <Timeline accent="#0ea5e9" entries={educations} label="Education" />
+            <Timeline
+              accent="#0ea5e9"
+              entries={educations}
+              label={t('section.education')}
+            />
           </div>
         </div>
 
         <div className="panel fade-up fade-up-3 mt-5">
-          <Timeline accent="#f59e0b" entries={awards} label="Awards" />
+          <Timeline
+            accent="#f59e0b"
+            entries={awards}
+            label={t('section.awards')}
+          />
         </div>
+
+        {/* 어학 · 자격증 */}
+        {credentials.length > 0 ? (
+          <div className="panel fade-up fade-up-3 mt-5">
+            <div className="mb-5 flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-[#e11d48]" />
+              <p className="text-xs font-extrabold tracking-[0.2em] uppercase text-[#e11d48]">
+                {t('about.certifications')}
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2.5">
+              {credentials.map((c) => (
+                <span
+                  className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white/70 px-4 py-2.5 backdrop-blur"
+                  key={`${c.name}-${c.detail ?? ''}`}
+                >
+                  <span className="text-[10px] font-bold text-[#e11d48]">
+                    {lang === 'en' ? c.kindEn : c.kind}
+                  </span>
+                  <span className="text-sm font-extrabold text-neutral-900">
+                    {c.name}
+                  </span>
+                  {c.detail ? (
+                    <span className="text-sm font-bold text-neutral-500">
+                      {c.detail}
+                    </span>
+                  ) : null}
+                </span>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         <div className="panel fade-up fade-up-3 mt-5">
           <div className="mb-1 flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-[#8b5cf6]" />
             <p className="text-xs font-extrabold tracking-[0.2em] uppercase text-[#8b5cf6]">
-              Tech &amp; Tools
+              {t('about.techTitle')}
             </p>
           </div>
           <p className="mb-6 pl-4.5 text-xs text-neutral-500">
-            각 태그를 누르면 해당 기술의 공식 사이트로 이동합니다.
+            {t('about.techHint')}
           </p>
           <div className="grid gap-6">
             {groups.map((group) => (
               <div key={group.category}>
                 <p className="mb-3 text-[11px] font-bold tracking-wide text-neutral-500">
-                  {group.category}
+                  {group.category === '기타' ? t('about.etc') : group.category}
                 </p>
                 <div className="flex flex-wrap gap-2.5">
                   {group.items.map((stack) => {
-                    const meta = techMeta[stack]!;
+                    const meta = techMeta[stack];
+
+                    // techMeta에 없는 스택은 회색 비링크 칩으로 안전하게 노출
+                    if (!meta) {
+                      return (
+                        <span
+                          className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-xs font-bold text-neutral-500"
+                          key={stack}
+                        >
+                          {stack}
+                        </span>
+                      );
+                    }
 
                     return (
                       <a

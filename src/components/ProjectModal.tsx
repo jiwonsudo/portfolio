@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { categoryMeta } from '../data/projects';
+import { useEffect, useRef, useState } from 'react';
+import { categoryMeta, roleLabel } from '../data/projects';
+import { useLang } from '../i18n';
 import type { Project } from '../types';
 
 export default function ProjectModal({
@@ -16,18 +17,43 @@ export default function ProjectModal({
         ? [project.image]
         : [];
 
+  const { lang, t, team } = useLang();
   const [index, setIndex] = useState(0);
-  const accent = categoryMeta[project.category].color;
+  const accent = categoryMeta[project.categories[0]].color;
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const go = (delta: number) =>
     setIndex((prev) => (prev + delta + images.length) % images.length);
 
-  // ESC 닫기 + 배경 스크롤 잠금
+  // ESC 닫기 + 배경 스크롤 잠금 + 포커스 트랩 + 열릴 때/닫힐 때 포커스 관리
   useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    closeRef.current?.focus();
+
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
       if (e.key === 'ArrowLeft') go(-1);
       if (e.key === 'ArrowRight') go(1);
+      if (e.key === 'Tab' && panelRef.current) {
+        // 포커스가 모달 밖으로 나가지 않게 가둔다
+        const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
@@ -36,6 +62,7 @@ export default function ProjectModal({
     return () => {
       window.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
+      previouslyFocused?.focus?.();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images.length]);
@@ -43,13 +70,14 @@ export default function ProjectModal({
   const meta = [
     project.date,
     project.context,
-    project.teamSize ? `${project.teamSize}인 팀` : null,
+    project.teamSize ? team(project.teamSize) : null,
   ]
     .filter(Boolean)
     .join(' · ');
 
   return (
     <div
+      aria-labelledby="project-modal-title"
       aria-modal
       className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 p-4 backdrop-blur-md"
       onClick={onClose}
@@ -58,11 +86,13 @@ export default function ProjectModal({
       <div
         className="modal-pop relative flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
+        ref={panelRef}
       >
         <button
           aria-label="닫기"
-          className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900/70 text-lg text-white backdrop-blur transition-colors hover:bg-neutral-900"
+          className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900/70 text-lg text-white backdrop-blur transition-colors hover:bg-neutral-900 focus-visible:ring-2 focus-visible:ring-white focus-visible:outline-none"
           onClick={onClose}
+          ref={closeRef}
           type="button"
         >
           ✕
@@ -119,31 +149,64 @@ export default function ProjectModal({
           {/* 본문 */}
           <div className="flex flex-col gap-4 p-6 md:p-8">
             <div className="flex flex-wrap items-center gap-2">
-              <span
-                className="rounded-full px-2.5 py-1 text-[10px] font-extrabold"
-                style={{
-                  backgroundColor: `color-mix(in srgb, ${accent} 16%, white)`,
-                  color: `color-mix(in srgb, ${accent} 78%, black)`,
-                }}
-              >
-                {categoryMeta[project.category].label}
-              </span>
-              <span className="text-[11px] font-bold tracking-wide text-neutral-400">
+              {project.categories.map((cat) => {
+                const c = categoryMeta[cat].color;
+                return (
+                  <span
+                    className="rounded-full px-2.5 py-1 text-[10px] font-extrabold"
+                    key={cat}
+                    style={{
+                      backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
+                      color: `color-mix(in srgb, ${c} 78%, black)`,
+                    }}
+                  >
+                    {lang === 'en'
+                      ? categoryMeta[cat].label
+                      : categoryMeta[cat].labelKo}
+                  </span>
+                );
+              })}
+              <span className="text-[11px] font-bold tracking-wide text-neutral-500">
                 {meta}
               </span>
             </div>
 
             <div>
-              <h2 className="text-2xl leading-tight font-extrabold text-neutral-900">
-                {project.titleKo}
+              <h2
+                className="text-2xl leading-tight font-extrabold text-neutral-900"
+                id="project-modal-title"
+              >
+                {lang === 'en' ? project.title : project.titleKo}
               </h2>
-              <p className="mt-1 text-sm font-bold text-neutral-400">
-                {project.title} · {project.role}
+              <p className="mt-1 text-sm font-bold text-neutral-500">
+                {lang === 'en' ? project.titleKo : project.title} ·{' '}
+                {roleLabel(project.role, lang)}
               </p>
             </div>
 
+            {project.contribution ? (
+              <div
+                className="rounded-xl border-l-4 bg-neutral-50 py-3 pr-4 pl-4"
+                style={{ borderColor: accent }}
+              >
+                <p
+                  className="text-[10px] font-extrabold tracking-[0.15em] uppercase"
+                  style={{ color: accent }}
+                >
+                  {t('modal.contribution')}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed font-semibold text-neutral-800 break-keep">
+                  {lang === 'en'
+                    ? (project.contributionEn ?? project.contribution)
+                    : project.contribution}
+                </p>
+              </div>
+            ) : null}
+
             <p className="text-sm leading-relaxed text-neutral-600 break-keep">
-              {project.detail ?? project.description}
+              {lang === 'en'
+                ? (project.detailEn ?? project.descriptionEn)
+                : (project.detail ?? project.description)}
             </p>
 
             <div className="flex flex-wrap gap-1.5">

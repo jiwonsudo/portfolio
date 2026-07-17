@@ -1,98 +1,348 @@
+import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import DeviceFrame from '../components/DeviceFrame';
+import Footer from '../components/Footer';
+import Highlights from '../components/Highlights';
+import ProjectCard from '../components/ProjectCard';
+import ProjectModal from '../components/ProjectModal';
+import {
+  categoryMeta,
+  dateSortKey,
+  projectList,
+  roleLabel,
+} from '../data/projects';
+import { profile } from '../data/profile';
+import { useLang } from '../i18n';
+import type { Project } from '../types';
 
 // 굵은 파이프라인 — 정점(좌) → 중앙 교차 → 저점(우)으로 흐르는 S 웨이브.
 // 가운데 교차점에서 앞뒤 컨트롤 포인트를 collinear로 맞춰 각 없이 이어진다.
 const PIPE_PATH =
   'M -80 250 C 200 250, 300 140, 600 250 C 900 360, 1000 250, 1280 250';
 
+// 모바일용 — 구불거림을 한 번으로 줄인 완만한 곡선
+const PIPE_PATH_MOBILE = 'M -80 320 C 380 320, 700 160, 1280 240';
+
+// 모바일용 — 색 변화를 줄여 주황~파랑 정도만
+const GRADIENT_STOPS_MOBILE = (
+  <>
+    <stop offset="0%" stopColor="#ffa751" />
+    <stop offset="100%" stopColor="#5b8def" />
+  </>
+);
+
 const GRADIENT_STOPS = (
   <>
     <stop offset="0%" stopColor="#ff5f6d" />
     <stop offset="28%" stopColor="#ffa751" />
     <stop offset="52%" stopColor="#5b8def" />
-    <stop offset="76%" stopColor="#8f5bff" />
-    <stop offset="100%" stopColor="#00c2a8" />
+    <stop offset="100%" stopColor="#8f5bff" />
   </>
 );
 
-export default function HomePage() {
+// 파이프라인 배경. preserveAspectRatio로 채움(slice)/전체(meet) 전환.
+function Pipe({
+  suffix,
+  preserveAspectRatio,
+  path = PIPE_PATH,
+  stops = GRADIENT_STOPS,
+  viewBox = '0 0 1200 500',
+  strokeWidth = 200,
+  className = '',
+}: {
+  suffix: string;
+  preserveAspectRatio: string;
+  path?: string;
+  stops?: ReactNode;
+  viewBox?: string;
+  strokeWidth?: number;
+  className?: string;
+}) {
   return (
-    <main className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden bg-white px-6 text-center">
-      <div className="pointer-events-none absolute inset-0">
-        {/* 원래의 연한 그라데이션 파이프 (항상 깔려 있음) */}
-        <svg
-          aria-hidden
-          className="absolute inset-0 h-full w-full opacity-25"
-          preserveAspectRatio="xMidYMid slice"
-          viewBox="0 0 1200 500"
-        >
-          <defs>
-            <linearGradient id="pipe-faint" x1="0" x2="1" y1="0" y2="0">
-              {GRADIENT_STOPS}
-            </linearGradient>
-          </defs>
-          <path
-            d={PIPE_PATH}
-            fill="none"
-            stroke="url(#pipe-faint)"
-            strokeLinecap="round"
-            strokeWidth="88"
-          />
-        </svg>
+    <div className={`pointer-events-none absolute inset-0 ${className}`}>
+      {/* 연한 파이프 */}
+      <svg
+        aria-hidden
+        className="absolute inset-0 h-full w-full opacity-25"
+        preserveAspectRatio={preserveAspectRatio}
+        viewBox={viewBox}
+      >
+        <defs>
+          <linearGradient id={`pf-${suffix}`} x1="0" x2="1" y1="0" y2="0">
+            {stops}
+          </linearGradient>
+        </defs>
+        <path
+          d={path}
+          fill="none"
+          stroke={`url(#pf-${suffix})`}
+          strokeLinecap="round"
+          strokeWidth={strokeWidth}
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+      {/* 선명한 버전 — 마스크가 좌→우로 훑으며 선명도를 올린다 */}
+      <svg
+        aria-hidden
+        className="pipe-reveal absolute inset-0 h-full w-full filter-[drop-shadow(0_8px_28px_rgba(143,91,255,0.28))]"
+        preserveAspectRatio={preserveAspectRatio}
+        viewBox={viewBox}
+      >
+        <defs>
+          <linearGradient id={`pv-${suffix}`} x1="0" x2="1" y1="0" y2="0">
+            {stops}
+          </linearGradient>
+        </defs>
+        <path
+          d={path}
+          fill="none"
+          stroke={`url(#pv-${suffix})`}
+          strokeLinecap="round"
+          strokeWidth={strokeWidth}
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+    </div>
+  );
+}
 
-        {/* 같은 파이프의 선명한 버전 — 마스크가 좌→우로 훑으며 선명도를 올린다 */}
-        <svg
-          aria-hidden
-          className="pipe-reveal absolute inset-0 h-full w-full filter-[drop-shadow(0_8px_28px_rgba(143,91,255,0.28))]"
-          preserveAspectRatio="xMidYMid slice"
-          viewBox="0 0 1200 500"
-        >
-          <defs>
-            <linearGradient id="pipe-vivid" x1="0" x2="1" y1="0" y2="0">
-              {GRADIENT_STOPS}
-            </linearGradient>
-          </defs>
-          <path
-            d={PIPE_PATH}
-            fill="none"
-            stroke="url(#pipe-vivid)"
-            strokeLinecap="round"
-            strokeWidth="88"
-          />
-        </svg>
-      </div>
+// featured 먼저, 그 안에서/뒤에서 최신순 → 히어로 1개 + 그리드 3개
+const showcased = [...projectList].sort((a, b) => {
+  if (Boolean(a.featured) !== Boolean(b.featured)) return a.featured ? -1 : 1;
+  return dateSortKey(b.date) - dateSortKey(a.date);
+});
+const hero = showcased[0];
+const rest = showcased.filter((p) => p !== hero).slice(0, 3);
 
-      {/* 설명 — 파이프 위 가독성은 글자 흰색 글로우(text-shadow)로 확보 */}
-      <div className="relative z-10 max-w-3xl [text-shadow:0_0_1px_rgba(255,255,255,0.5)]">
-        <p className="mb-5 text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
-          Frontend-based Software Engineer
-        </p>
-        <h1 className="text-[clamp(2.6rem,7vw,5rem)] leading-tight font-extrabold tracking-tight text-neutral-900">
-          화면에서 시작해
-          <br />
-          유저에게로.
-        </h1>
-        <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep">
-          화면과 서버를 하나의 흐름으로 잇습니다.
-          <br />
-          사용자가 자연스럽게 몰입할 수 있는 경험을 설계하고 구현합니다.
-        </p>
+export default function HomePage() {
+  const { lang, t, team } = useLang();
+  const [selected, setSelected] = useState<Project | null>(null);
 
-        <div className="mt-10 flex items-center justify-center gap-4 text-shadow-none">
-          <Link
-            className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
-            to="/projects"
-          >
-            프로젝트 보기 →
-          </Link>
-          <Link
-            className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-7 py-3 text-sm font-bold text-neutral-700 transition-colors hover:border-neutral-400"
-            to="/about"
-          >
-            소개
-          </Link>
+  const heroAccent = hero ? categoryMeta[hero.categories[0]].color : '#171717';
+  const heroMeta = hero
+    ? [hero.date, hero.context, hero.teamSize ? team(hero.teamSize) : null]
+        .filter(Boolean)
+        .join(' · ')
+    : '';
+
+  return (
+    <main className="bg-white">
+      {/* ── 히어로 (파이프라인) ── */}
+      <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
+        {/* 모든 화면에서 동일하게 보이도록 meet(전체 표시)로 통일 →
+            화면 크기·비율과 무관하게 구불거림 횟수·색 스펙트럼(빨강~보라)이 항상 같다.
+            굵기는 strokeWidth, 위아래 여백은 viewBox 높이로 조절. */}
+        {/* 데스크톱: 2번 구불거리는 곡선 + 풀 스펙트럼 */}
+        <Pipe
+          className="hidden md:block"
+          preserveAspectRatio="xMidYMid meet"
+          suffix="d"
+          viewBox="-90 60 1380 380"
+        />
+        {/* 모바일: 구불거림 1번 + 주황~파랑만 */}
+        <Pipe
+          className="md:hidden"
+          path={PIPE_PATH_MOBILE}
+          preserveAspectRatio="xMidYMid meet"
+          stops={GRADIENT_STOPS_MOBILE}
+          suffix="m"
+          viewBox="-90 60 1380 380"
+        />
+
+        <div className="relative z-10 max-w-3xl [text-shadow:0_0_1px_rgba(255,255,255,0.5)]">
+          <p className="mb-5 text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+            {t('home.role')}
+          </p>
+          <h1 className="text-[clamp(2.6rem,7vw,5rem)] leading-tight font-extrabold tracking-tight text-neutral-900">
+            {t('home.headline1')}
+            <br />
+            {t('home.headline2')}
+          </h1>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep">
+            {t('home.sub')}
+          </p>
+
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-shadow-none">
+            <Link
+              className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
+              to="/projects"
+            >
+              {t('home.viewProjects')}
+            </Link>
+            <Link
+              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-7 py-3 text-sm font-bold text-neutral-700 transition-colors hover:border-neutral-400"
+              to="/about"
+            >
+              {t('home.about')}
+            </Link>
+          </div>
+
+          {/* 연락 / 외부 링크 */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-bold text-neutral-500 text-shadow-none">
+            {[
+              ...(profile.resume
+                ? [
+                    {
+                      label: t('common.resume'),
+                      href: profile.resume,
+                      ext: true,
+                    },
+                  ]
+                : []),
+              { label: 'GitHub', href: profile.github, ext: true },
+              { label: 'LinkedIn', href: profile.linkedin, ext: true },
+              { label: 'Blog', href: profile.blog, ext: true },
+              { label: 'Email', href: `mailto:${profile.email}`, ext: false },
+            ].map((s) => (
+              <a
+                className="underline-offset-4 transition-colors hover:text-neutral-900 hover:underline"
+                href={s.href}
+                key={s.label}
+                rel={s.ext ? 'noreferrer' : undefined}
+                target={s.ext ? '_blank' : undefined}
+              >
+                {s.label}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── 성과 하이라이트 ── */}
+      <section className="relative px-6 pt-16 md:pt-20">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+            {t('home.highlightsOverline')}
+          </p>
+          <h2 className="mt-3 text-[clamp(1.8rem,5vw,3rem)] leading-tight font-extrabold text-neutral-900">
+            {t('home.highlightsTitle')}
+          </h2>
+          <Highlights className="mt-10" />
+        </div>
+      </section>
+
+      {/* ── Featured Works ── */}
+      {hero ? (
+        <section className="relative px-6 pt-16 pb-24 md:pt-20 md:pb-32">
+          <div className="mx-auto max-w-6xl">
+            <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+              {t('home.selectedWork')}
+            </p>
+            <h2 className="mt-3 text-[clamp(1.8rem,5vw,3rem)] leading-tight font-extrabold text-neutral-900">
+              {t('home.featuredTitle')}
+            </h2>
+
+            {/* 히어로 — 목업 쇼케이스 */}
+            <div className="mt-14 grid items-center gap-10 md:grid-cols-2">
+              <button
+                className="group mx-auto w-full max-w-65"
+                onClick={() => setSelected(hero)}
+                type="button"
+              >
+                <div className="transition-transform duration-500 group-hover:-translate-y-2">
+                  <DeviceFrame
+                    alt={`${hero.title} 미리보기`}
+                    fit="cover"
+                    objectPosition="top"
+                    src={hero.image}
+                    variant={
+                      hero.display === 'default' ? 'mobile' : hero.display
+                    }
+                  />
+                </div>
+              </button>
+
+              <div className="text-left">
+                <div className="flex flex-wrap items-center gap-2">
+                  {hero.categories.map((cat) => {
+                    const c = categoryMeta[cat].color;
+                    return (
+                      <span
+                        className="rounded-full px-2.5 py-1 text-[10px] font-extrabold"
+                        key={cat}
+                        style={{
+                          backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
+                          color: `color-mix(in srgb, ${c} 78%, black)`,
+                        }}
+                      >
+                        {lang === 'en'
+                          ? categoryMeta[cat].label
+                          : categoryMeta[cat].labelKo}
+                      </span>
+                    );
+                  })}
+                  {hero.featured ? (
+                    <span className="rounded-full bg-neutral-900 px-2.5 py-1 text-[10px] font-extrabold text-white">
+                      <span className="text-[#facc15]">★</span> Featured
+                    </span>
+                  ) : null}
+                </div>
+
+                <h3 className="mt-4 text-[clamp(1.6rem,3.5vw,2.4rem)] leading-tight font-extrabold text-neutral-900">
+                  {lang === 'en' ? hero.title : hero.titleKo}
+                </h3>
+                <p className="mt-1 text-sm font-bold text-neutral-500">
+                  {lang === 'en' ? hero.titleKo : hero.title} ·{' '}
+                  {roleLabel(hero.role, lang)}
+                </p>
+                <p className="mt-1 text-[11px] font-bold tracking-wide text-neutral-500">
+                  {heroMeta}
+                </p>
+
+                <p className="mt-5 max-w-lg text-sm leading-relaxed text-neutral-600 break-keep md:text-base">
+                  {lang === 'en' ? hero.descriptionEn : hero.description}
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {hero.stack.slice(0, 7).map((item) => (
+                    <span
+                      className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[10px] font-bold text-neutral-500"
+                      key={item}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+
+                <button
+                  className="mt-7 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white transition-transform hover:scale-105"
+                  onClick={() => setSelected(hero)}
+                  style={{ backgroundColor: heroAccent }}
+                  type="button"
+                >
+                  {t('common.viewDetail')}
+                </button>
+              </div>
+            </div>
+
+            {/* 나머지 대표작 — 클린 그리드 */}
+            <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {rest.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  onOpen={() => setSelected(project)}
+                  project={project}
+                />
+              ))}
+            </div>
+
+            <div className="mt-14 text-center">
+              <Link
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-7 py-3 text-sm font-bold text-neutral-800 transition-colors hover:border-neutral-900"
+                to="/projects"
+              >
+                {t('home.allProjects')}
+              </Link>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      <Footer />
+
+      {selected ? (
+        <ProjectModal onClose={() => setSelected(null)} project={selected} />
+      ) : null}
 
       <style>{`
         .pipe-reveal {

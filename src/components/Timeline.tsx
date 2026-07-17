@@ -1,4 +1,5 @@
 import type { TimelineEntry } from '../data/profile';
+import { useLang } from '../i18n';
 
 export default function Timeline({
   entries,
@@ -10,6 +11,8 @@ export default function Timeline({
   /** 섹션 액센트 컬러 */
   accent: string;
 }) {
+  const { lang } = useLang();
+
   return (
     <div>
       <div className="mb-5 flex items-center gap-2">
@@ -45,9 +48,11 @@ export default function Timeline({
               {entry.period}
             </span>
             <p className="mt-1.5 text-sm leading-snug font-extrabold text-neutral-900">
-              {entry.title}
+              {lang === 'en' ? entry.titleEn : entry.title}
             </p>
-            <p className="text-xs text-neutral-500">{entry.titleEn}</p>
+            <p className="text-xs text-neutral-500">
+              {lang === 'en' ? entry.title : entry.titleEn}
+            </p>
           </li>
         ))}
       </ul>

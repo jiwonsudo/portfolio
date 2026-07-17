@@ -1,7 +1,13 @@
-export type ProjectCategory = 'Web' | 'App' | 'AI';
+export type ProjectCategory =
+  | 'Web'
+  | 'Backend'
+  | 'App'
+  | 'AI'
+  | 'Embedded'
+  | 'Simulation';
 
-/** 대표 이미지를 어떤 기기 프레임으로 전시할지 */
-export type ProjectDisplay = 'mobile' | 'desktop';
+/** 대표 이미지를 어떤 기기 프레임으로 전시할지 ('default'는 목업 없이 이미지만) */
+export type ProjectDisplay = 'mobile' | 'desktop' | 'default';
 
 export type Project = {
   /** 이미지 파일명과 매칭되는 고유 slug */
@@ -10,7 +16,8 @@ export type Project = {
   title: string;
   /** 한글 표기 제목 */
   titleKo: string;
-  category: ProjectCategory;
+  /** 카테고리(복수 가능). 첫 번째가 대표 색으로 쓰인다. */
+  categories: ProjectCategory[];
   /** 'mobile' → 폰 프레임(카드에선 윗부분만) · 'desktop' → 모니터 프레임(전체) */
   display: ProjectDisplay;
   /** 진행 시기 (예: 'Nov 2023') */
@@ -26,6 +33,8 @@ export type Project = {
   descriptionEn: string;
   /** 모달용 상세 설명 (여러 문단 가능) */
   detail?: string;
+  /** 상세 설명 영문 */
+  detailEn?: string;
   stack: string[];
   githubUrl?: string;
   demoUrl?: string;
@@ -35,10 +44,18 @@ export type Project = {
   gallery?: string[];
   /** 대표작으로 강조할지 여부 */
   featured?: boolean;
+  /** 카드에 크롬 배지로 강조할 대표 성과 (예: '실사용자 1,088명') */
+  highlight?: string;
+  highlightEn?: string;
+  /** 모달에 강조할 '나의 핵심 기여' (팀 프로젝트에서 특히 유용) */
+  contribution?: string;
+  contributionEn?: string;
 };
 
 export type CategoryMeta = {
   label: string;
+  /** 카테고리 한글 라벨 */
+  labelKo: string;
   /** 카테고리 액센트 컬러 */
   color: string;
 };
