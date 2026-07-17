@@ -13,10 +13,10 @@ export type Lang = 'ko' | 'en';
 const STRINGS = {
   ko: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': '필요하면,',
-    'home.headline2': '직접 만듭니다.',
+    'home.headline1': '기다리지 않고,',
+    'home.headline2': '만들어 냅니다.',
     'home.sub':
-      '웹 화면부터 드론 비행제어기, 로켓 엔진 시뮬레이터까지 — 필요한 곳이면 직접 구현해 제품을 완성합니다.',
+      '웹 화면부터 드론 비행제어기, 로켓 엔진 시뮬레이터까지 — 프로덕트든 데이터든 결과물이든, 필요하면 피벗도 마다하지 않고 결국 만들어 냅니다.',
     'home.viewProjects': '프로젝트 보기 →',
     'home.about': '프로필',
     'home.highlightsOverline': 'At a Glance',
@@ -60,10 +60,10 @@ const STRINGS = {
   },
   en: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': 'If it’s needed,',
-    'home.headline2': 'I build it myself.',
+    'home.headline1': "I don't wait —",
+    'home.headline2': 'I make it happen.',
     'home.sub':
-      'From web screens to a drone flight controller and a rocket-engine simulator — I build whatever it takes to finish the product.',
+      'From web screens to a drone flight controller and a rocket-engine simulator — a product, data, or any deliverable, pivoting when it takes one, I always end up making something.',
     'home.viewProjects': 'View Projects →',
     'home.about': 'About',
     'home.highlightsOverline': 'At a Glance',
