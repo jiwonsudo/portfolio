@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
-import ProjectCardSkeleton from '../components/ProjectCardSkeleton';
 import ProjectModal from '../components/ProjectModal';
 import Reveal from '../components/Reveal';
 import {
@@ -24,7 +23,6 @@ export default function ProjectsPage() {
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest');
   const [selected, setSelected] = useState<Project | null>(null);
   const [visible, setVisible] = useState(BATCH);
-  const [loading, setLoading] = useState(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
   const tabs = useMemo<{ key: Filter; count: number }[]>(
@@ -66,35 +64,28 @@ export default function ProjectsPage() {
   if (viewKey !== prevKey) {
     setPrevKey(viewKey);
     setVisible(BATCH);
-    setLoading(false);
   }
 
-  // 무한 스크롤 — 하단 센티넬이 보이면 다음 배치 로드(스켈레톤 잠깐 노출)
+  // 무한 스크롤 — 데이터가 번들에 있어 즉시 붙일 수 있으므로, 화면 도달 한참 전
+  // (약 1.2화면 위)에서 다음 배치를 미리 로드해 스크롤 중 끊김이 없게 한다.
   const hasMore = visible < sorted.length;
   useEffect(() => {
     const el = sentinelRef.current;
-    if (!el || !hasMore || loading) return;
+    if (!el || !hasMore) return;
 
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setLoading(true);
-          window.setTimeout(() => {
-            setVisible((v) => Math.min(v + BATCH, sorted.length));
-            setLoading(false);
-          }, 400);
+          setVisible((v) => Math.min(v + BATCH, sorted.length));
         }
       },
-      { rootMargin: '250px' },
+      { rootMargin: '1200px 0px' },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [hasMore, loading, sorted.length]);
+  }, [hasMore, sorted.length]);
 
   const shown = sorted.slice(0, visible);
-  const skeletonCount = loading
-    ? Math.min(BATCH, sorted.length - visible)
-    : 0;
 
   return (
     <main className="min-h-svh bg-white text-neutral-900">
@@ -186,9 +177,6 @@ export default function ProjectsPage() {
                 project={project}
               />
             </Reveal>
-          ))}
-          {Array.from({ length: skeletonCount }).map((_, i) => (
-            <ProjectCardSkeleton key={`skeleton-${i}`} />
           ))}
         </div>
 

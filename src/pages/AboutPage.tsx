@@ -49,9 +49,9 @@ export default function AboutPage() {
       >
         <div className="blob float-a absolute -top-40 -left-32 h-128 w-lg bg-[radial-gradient(circle,#ff5f6d99,transparent_68%)]" />
         <div className="blob float-b absolute -top-24 right-0 h-136 w-136 bg-[radial-gradient(circle,#5b8def99,transparent_68%)]" />
-        <div className="blob float-c absolute top-1/3 -left-24 h-120 w-120 bg-[radial-gradient(circle,#8f5bff8c,transparent_68%)]" />
+        <div className="blob float-c absolute top-1/3 -left-24 hidden h-120 w-120 bg-[radial-gradient(circle,#8f5bff8c,transparent_68%)] md:block" />
         <div className="blob float-a absolute right-1/4 bottom-10 h-128 w-lg bg-[radial-gradient(circle,#00c2a88c,transparent_68%)]" />
-        <div className="blob float-b absolute -bottom-24 left-1/4 h-120 w-120 bg-[radial-gradient(circle,#ffa75199,transparent_68%)]" />
+        <div className="blob float-b absolute -bottom-24 left-1/4 hidden h-120 w-120 bg-[radial-gradient(circle,#ffa75199,transparent_68%)] md:block" />
       </div>
 
       <section className="relative mx-auto w-full max-w-5xl px-5 pt-32 pb-20 md:px-10 md:pt-40">
@@ -214,22 +214,27 @@ export default function AboutPage() {
         .panel {
           border-radius: 1.5rem;
           border: 1px solid rgba(255, 255, 255, 0.6);
-          background: rgba(255, 255, 255, 0.72);
-          backdrop-filter: blur(14px);
+          /* 모바일은 backdrop-filter가 비싸 불투명 배경으로 대체(아래 md에서 blur 적용) */
+          background: rgba(255, 255, 255, 0.94);
           box-shadow: 0 10px 44px rgba(80, 70, 160, 0.1);
           padding: 1.5rem;
         }
-        @media (min-width: 768px) {
-          .panel { padding: 2rem; }
-        }
         .blob {
           border-radius: 9999px;
-          filter: blur(52px);
-          will-change: transform;
+          /* 모바일은 블러를 낮춰 합성 비용을 줄임 */
+          filter: blur(34px);
         }
-        .float-a { animation: float-a 14s ease-in-out infinite; }
-        .float-b { animation: float-b 17s ease-in-out infinite; }
-        .float-c { animation: float-c 12s ease-in-out infinite; }
+        @media (min-width: 768px) {
+          .panel {
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(14px);
+          }
+          .blob { filter: blur(52px); will-change: transform; }
+          .float-a { animation: float-a 14s ease-in-out infinite; }
+          .float-b { animation: float-b 17s ease-in-out infinite; }
+          .float-c { animation: float-c 12s ease-in-out infinite; }
+        }
         @keyframes float-a {
           0%, 100% { transform: translate(0, 0) scale(1); }
           50% { transform: translate(90px, -70px) scale(1.18); }

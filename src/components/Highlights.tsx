@@ -25,12 +25,15 @@ export default function Highlights({
           delay={i * 90}
           key={h.label}
         >
-          <div className="flex items-center gap-2">
-            <span aria-hidden className={lg ? 'text-2xl' : 'text-lg'}>
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <span
+              aria-hidden
+              className={`shrink-0 ${lg ? 'text-xl md:text-2xl' : 'text-base md:text-lg'}`}
+            >
               {h.icon}
             </span>
             <p
-              className={`min-w-0 bg-linear-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text font-extrabold wrap-break-word text-transparent ${lg ? 'text-3xl leading-none md:text-4xl' : 'text-2xl leading-tight md:text-3xl'}`}
+              className={`bg-linear-to-r from-[#6366f1] to-[#8b5cf6] bg-clip-text font-extrabold whitespace-nowrap text-transparent ${lg ? 'text-2xl leading-none md:text-4xl' : 'text-xl leading-tight md:text-3xl'}`}
             >
               {lang === 'en' ? h.valueEn : h.value}
             </p>
