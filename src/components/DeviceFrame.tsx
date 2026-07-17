@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react';
-import imacFront from '../assets/mockups/imac_front.png';
-import iphoneFront from '../assets/mockups/iphone_front.png';
+import imacFront from '../assets/mockups/imac_front.webp';
+import iphoneFront from '../assets/mockups/iphone_front.webp';
 import type { ProjectDisplay } from '../types';
 
 type DeviceFrameProps = {

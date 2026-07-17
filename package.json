@@ -10,7 +10,8 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "compress:images": "node scripts/compress-images.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "images:webp": "node scripts/to-webp.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",

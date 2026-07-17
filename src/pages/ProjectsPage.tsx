@@ -1,7 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Footer from '../components/Footer';
 import ProjectCard from '../components/ProjectCard';
+import ProjectCardSkeleton from '../components/ProjectCardSkeleton';
 import ProjectModal from '../components/ProjectModal';
+import Reveal from '../components/Reveal';
 import {
   categoryMeta,
   categoryOrder,
@@ -14,11 +16,16 @@ import type { Project, ProjectCategory } from '../types';
 type Filter = 'All' | ProjectCategory;
 type SortOrder = 'newest' | 'oldest';
 
+const BATCH = 6; // 한 번에 노출/추가할 카드 수
+
 export default function ProjectsPage() {
   const { t, lang } = useLang();
   const [filter, setFilter] = useState<Filter>('All');
   const [sortOrder, setSortOrder] = useState<SortOrder>('newest');
   const [selected, setSelected] = useState<Project | null>(null);
+  const [visible, setVisible] = useState(BATCH);
+  const [loading, setLoading] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   const tabs = useMemo<{ key: Filter; count: number }[]>(
     () => [
@@ -53,18 +60,56 @@ export default function ProjectsPage() {
     return sortOrder === 'newest' ? -diff : diff;
   });
 
+  // 필터/정렬이 바뀌면 렌더 중에 처음 배치로 리셋 (effect 없이)
+  const viewKey = `${filter}|${sortOrder}`;
+  const [prevKey, setPrevKey] = useState(viewKey);
+  if (viewKey !== prevKey) {
+    setPrevKey(viewKey);
+    setVisible(BATCH);
+    setLoading(false);
+  }
+
+  // 무한 스크롤 — 하단 센티넬이 보이면 다음 배치 로드(스켈레톤 잠깐 노출)
+  const hasMore = visible < sorted.length;
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el || !hasMore || loading) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setLoading(true);
+          window.setTimeout(() => {
+            setVisible((v) => Math.min(v + BATCH, sorted.length));
+            setLoading(false);
+          }, 400);
+        }
+      },
+      { rootMargin: '250px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [hasMore, loading, sorted.length]);
+
+  const shown = sorted.slice(0, visible);
+  const skeletonCount = loading
+    ? Math.min(BATCH, sorted.length - visible)
+    : 0;
+
   return (
     <main className="min-h-svh bg-white text-neutral-900">
       <section className="mx-auto w-full max-w-6xl px-5 pt-32 pb-20 md:px-10 md:pt-40">
-        <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
-          {t('projects.archive')}
-        </p>
-        <h1 className="mt-4 text-[clamp(2.8rem,9vw,5.5rem)] leading-none font-extrabold text-neutral-900">
-          {t('projects.works')}
-        </h1>
-        <p className="mt-6 max-w-2xl text-sm leading-relaxed text-neutral-500 md:text-base">
-          {t('projects.intro')}
-        </p>
+        <Reveal>
+          <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+            {t('projects.archive')}
+          </p>
+          <h1 className="mt-4 text-[clamp(2.8rem,9vw,5.5rem)] leading-none font-extrabold text-neutral-900">
+            {t('projects.works')}
+          </h1>
+          <p className="mt-6 max-w-2xl text-sm leading-relaxed text-neutral-500 md:text-base">
+            {t('projects.intro')}
+          </p>
+        </Reveal>
 
         {/* 카테고리 필터 + 정렬 */}
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4">
@@ -121,15 +166,34 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {sorted.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              onOpen={() => setSelected(project)}
-              project={project}
-            />
+        <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs font-medium text-neutral-600">
+          <span aria-hidden>👆</span>
+          {t('projects.hint')}
+        </p>
+
+        <h2 className="sr-only">
+          {lang === 'en' ? 'Project list' : '프로젝트 목록'}
+        </h2>
+        <div className="mt-6 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {shown.map((project, i) => (
+            <Reveal
+              className="h-full"
+              delay={(i % 3) * 80}
+              key={`${viewKey}-${project.slug}`}
+            >
+              <ProjectCard
+                onOpen={() => setSelected(project)}
+                project={project}
+              />
+            </Reveal>
+          ))}
+          {Array.from({ length: skeletonCount }).map((_, i) => (
+            <ProjectCardSkeleton key={`skeleton-${i}`} />
           ))}
         </div>
+
+        {/* 무한 스크롤 트리거 */}
+        {hasMore ? <div aria-hidden className="h-1" ref={sentinelRef} /> : null}
       </section>
 
       <Footer />

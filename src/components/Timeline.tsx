@@ -22,7 +22,7 @@ export default function Timeline({
         />
         <p
           className="text-xs font-extrabold tracking-[0.2em] uppercase"
-          style={{ color: accent }}
+          style={{ color: `color-mix(in srgb, ${accent} 48%, black)` }}
         >
           {label}
         </p>
@@ -42,7 +42,7 @@ export default function Timeline({
               className="inline-block rounded-full px-2 py-0.5 text-[10px] font-bold"
               style={{
                 backgroundColor: `color-mix(in srgb, ${accent} 14%, white)`,
-                color: `color-mix(in srgb, ${accent} 75%, black)`,
+                color: `color-mix(in srgb, ${accent} 48%, black)`,
               }}
             >
               {entry.period}

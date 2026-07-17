@@ -133,8 +133,8 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
     demoUrl: 'https://finch-iota.vercel.app',
     githubUrl: 'https://github.com/jiwonsudo/finch',
     featured: true,
-    highlight: '방문당 3.9페이지',
-    highlightEn: '3.9 pages / visit',
+    highlight: 'PV/Session 3.9회',
+    highlightEn: '3.9 Pages / Session',
   },
   {
     slug: 'vpl-engine-sim',

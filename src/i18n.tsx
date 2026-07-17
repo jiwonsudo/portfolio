@@ -28,6 +28,7 @@ const STRINGS = {
     'projects.works': 'Projects',
     'projects.intro':
       '간단한 아이디어를 확장하고, 여러 개발 도구로 구현하여 효과적으로 실력을 기르려 노력합니다.',
+    'projects.hint': '각 프로젝트를 누르면 코드·상세 설명·추가 사진을 볼 수 있어요.',
     'sort.newest': '최신순',
     'sort.oldest': '시간순',
     'filter.all': '전체',
@@ -64,6 +65,8 @@ const STRINGS = {
     'projects.works': 'Projects',
     'projects.intro':
       'I grow by expanding simple ideas and building them with a range of tools.',
+    'projects.hint':
+      'Tap any project to see the code, full write-up, and more screenshots.',
     'sort.newest': 'Newest',
     'sort.oldest': 'Oldest',
     'filter.all': 'All',

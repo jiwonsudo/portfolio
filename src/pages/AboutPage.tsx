@@ -62,7 +62,7 @@ export default function AboutPage() {
           <span className="text-neutral-900">
             {lang === 'en' ? profile.name : profile.nameKo}
           </span>
-          <span className="text-neutral-400">
+          <span className="text-[#8a8a8a]">
             {' · '}
             {lang === 'en' ? profile.nameKo : profile.name}
           </span>
@@ -97,7 +97,7 @@ export default function AboutPage() {
         </div>
 
         {/* 성과 하이라이트 */}
-        <Highlights className="fade-up fade-up-3 mt-12" />
+        <Highlights className="mt-12" />
 
         <div className="fade-up fade-up-3 mt-16 grid gap-5 md:grid-cols-2">
           <div className="panel">
@@ -129,7 +129,7 @@ export default function AboutPage() {
           <div className="panel fade-up fade-up-3 mt-5">
             <div className="mb-5 flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-[#e11d48]" />
-              <p className="text-xs font-extrabold tracking-[0.2em] uppercase text-[#e11d48]">
+              <p className="text-xs font-extrabold tracking-[0.2em] uppercase text-[#be123c]">
                 {t('about.certifications')}
               </p>
             </div>
@@ -139,7 +139,7 @@ export default function AboutPage() {
                   className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white/70 px-4 py-2.5 backdrop-blur"
                   key={`${c.name}-${c.detail ?? ''}`}
                 >
-                  <span className="text-[10px] font-bold text-[#e11d48]">
+                  <span className="text-[10px] font-bold text-[#be123c]">
                     {lang === 'en' ? c.kindEn : c.kind}
                   </span>
                   <span className="text-sm font-extrabold text-neutral-900">
@@ -159,7 +159,7 @@ export default function AboutPage() {
         <div className="panel fade-up fade-up-3 mt-5">
           <div className="mb-1 flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-[#8b5cf6]" />
-            <p className="text-xs font-extrabold tracking-[0.2em] uppercase text-[#8b5cf6]">
+            <p className="text-xs font-extrabold tracking-[0.2em] uppercase text-[#7c3aed]">
               {t('about.techTitle')}
             </p>
           </div>
@@ -194,10 +194,7 @@ export default function AboutPage() {
                         href={meta.url}
                         key={stack}
                         rel="noreferrer"
-                        style={{
-                          ['--c' as string]: meta.color,
-                          ['--fg' as string]: meta.dark ? '#181512' : '#ffffff',
-                        }}
+                        style={{ ['--c' as string]: meta.color }}
                         target="_blank"
                       >
                         {stack}
@@ -250,14 +247,15 @@ export default function AboutPage() {
           .float-a, .float-b, .float-c { animation: none; }
         }
         .tech-chip {
-          background-color: var(--c);
-          color: var(--fg);
-          transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+          background-color: color-mix(in srgb, var(--c) 14%, white);
+          color: color-mix(in srgb, var(--c) 48%, black);
+          border: 1px solid color-mix(in srgb, var(--c) 22%, white);
+          transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
         }
         .tech-chip:hover {
           transform: translateY(-4px);
-          box-shadow: 0 10px 22px -6px color-mix(in srgb, var(--c) 65%, transparent);
-          filter: saturate(1.15);
+          background-color: color-mix(in srgb, var(--c) 22%, white);
+          box-shadow: 0 10px 22px -6px color-mix(in srgb, var(--c) 45%, transparent);
         }
         .fade-up {
           animation: about-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;

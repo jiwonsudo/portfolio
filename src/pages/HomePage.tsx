@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 import Highlights from '../components/Highlights';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
+import Reveal from '../components/Reveal';
 import {
   categoryMeta,
   dateSortKey,
@@ -211,20 +212,22 @@ export default function HomePage() {
       {/* ── 성과 하이라이트 ── */}
       <section className="relative px-6 pt-16 md:pt-20">
         <div className="mx-auto max-w-6xl">
-          <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
-            {t('home.highlightsOverline')}
-          </p>
-          <h2 className="mt-3 text-[clamp(1.8rem,5vw,3rem)] leading-tight font-extrabold text-neutral-900">
-            {t('home.highlightsTitle')}
-          </h2>
-          <Highlights className="mt-10" />
+          <Reveal>
+            <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
+              {t('home.highlightsOverline')}
+            </p>
+            <h2 className="mt-3 text-[clamp(1.8rem,5vw,3rem)] leading-tight font-extrabold text-neutral-900">
+              {t('home.highlightsTitle')}
+            </h2>
+          </Reveal>
+          <Highlights className="mt-10" cols={2} size="lg" />
         </div>
       </section>
 
       {/* ── Featured Works ── */}
       {hero ? (
         <section className="relative px-6 pt-16 pb-24 md:pt-20 md:pb-32">
-          <div className="mx-auto max-w-6xl">
+          <Reveal className="mx-auto max-w-6xl">
             <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
               {t('home.selectedWork')}
             </p>
@@ -274,6 +277,13 @@ export default function HomePage() {
                   {hero.featured ? (
                     <span className="rounded-full bg-neutral-900 px-2.5 py-1 text-[10px] font-extrabold text-white">
                       <span className="text-[#facc15]">★</span> Featured
+                    </span>
+                  ) : null}
+                  {hero.highlight ? (
+                    <span className="chrome-badge rounded-full px-2.5 py-1 text-[10px] font-extrabold text-neutral-800">
+                      {lang === 'en'
+                        ? (hero.highlightEn ?? hero.highlight)
+                        : hero.highlight}
                     </span>
                   ) : null}
                 </div>
@@ -334,7 +344,7 @@ export default function HomePage() {
                 {t('home.allProjects')}
               </Link>
             </div>
-          </div>
+          </Reveal>
         </section>
       ) : null}
 
