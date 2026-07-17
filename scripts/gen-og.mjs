@@ -21,10 +21,10 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
         fill="none" stroke="url(#flow)" stroke-width="70" stroke-linecap="round" opacity="0.22"/>
   <text x="90" y="150" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700"
         letter-spacing="6" fill="#8b8f98">FRONTEND-BASED SOFTWARE ENGINEER</text>
-  <text x="86" y="290" font-family="Helvetica, Arial, sans-serif" font-size="118" font-weight="800"
-        fill="#141414">Jiwon Jeong</text>
-  <text x="90" y="380" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="600"
-        fill="#3f4653">If it&#8217;s needed, I build it myself.</text>
+  <text x="86" y="285" font-family="'Apple SD Gothic Neo', AppleGothic, Helvetica, sans-serif" font-size="90" font-weight="800"
+        fill="#141414">정지원 · Jiwon Jeong</text>
+  <text x="90" y="385" font-family="'Apple SD Gothic Neo', AppleGothic, sans-serif" font-size="46" font-weight="700"
+        fill="#3f4653">기다리지 않고, 만들어 냅니다.</text>
   <text x="90" y="560" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700"
         fill="#a3a8b2">github.com/jiwonsudo</text>
 </svg>`;
