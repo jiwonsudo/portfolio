@@ -44,6 +44,16 @@ export default function Footer() {
           <span aria-hidden>✉</span>
           {t('contact.email')}
         </a>
+        {profile.resume ? (
+          <a
+            className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-5 py-2.5 text-sm font-bold text-neutral-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-lg hover:shadow-neutral-300/60"
+            href={profile.resume}
+            rel="noreferrer"
+            target="_blank"
+          >
+            {t('common.resume')} ↗
+          </a>
+        ) : null}
         {[
           { label: 'GitHub', href: profile.github },
           { label: 'LinkedIn', href: profile.linkedin },
