@@ -51,6 +51,8 @@ pnpm lint             # ESLint
 pnpm format           # Prettier
 pnpm images:webp      # 이미지 WebP 변환
 pnpm compress:images  # 이미지 압축
+pnpm resume           # 이력서 PDF 생성 (public/resume.pdf)
+pnpm og               # OG 이미지 생성 (public/og-image.png)
 ```
 
 ## 이력서 PDF
@@ -58,14 +60,14 @@ pnpm compress:images  # 이미지 압축
 [`scripts/resume.html`](scripts/resume.html)이 이력서 원본입니다. 내용을 고친 뒤 아래 명령으로 `public/resume.pdf`를 다시 생성합니다.
 
 ```bash
-node scripts/gen-resume.mjs
+pnpm resume
 ```
 
 헤드리스 Chrome의 print-to-pdf를 사용하므로 별도 의존성이 필요 없으며, 사이트와 동일한 Pretendard 서체로 A4에 렌더링됩니다. 생성된 PDF는 [`src/data/profile.ts`](src/data/profile.ts)의 `resume` 필드를 통해 Home·About의 이력서 버튼으로 연결됩니다.
 
 ## OG 이미지
 
-소셜 공유용 이미지는 [`scripts/gen-og.mjs`](scripts/gen-og.mjs)에서 SVG로 정의합니다. 문구나 색을 바꾼 뒤 `node scripts/gen-og.mjs`를 실행하면 `public/og-image.png`가 갱신됩니다.
+소셜 공유용 이미지는 [`scripts/gen-og.mjs`](scripts/gen-og.mjs)에서 SVG로 정의합니다. 문구나 색을 바꾼 뒤 `pnpm og`를 실행하면 `public/og-image.png`가 갱신됩니다.
 
 ## 배포
 
