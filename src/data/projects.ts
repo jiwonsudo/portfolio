@@ -52,7 +52,7 @@ const ROLE_EN: Record<string, string> = {
   프론트엔드: 'Front-end',
   '프론트엔드 리더': 'Front-end lead',
   '팀 리더': 'Team lead',
-  'Web part': 'Web part',
+  '웹 파트': 'Web part',
   'FC 프로그래밍 & 하드웨어 제작': 'FC firmware & hardware',
   'SW 개발(예술전공 협업)': 'SW dev (art-major collab)',
 };
@@ -171,8 +171,8 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
     categories: ['Web'],
     display: 'mobile',
     date: 'May 2026',
-    context: 'SOPT',
-    role: 'Web part',
+    context: "Let's SOPT 38th",
+    role: '웹 파트',
     description:
       'SOPT 기획, 디자인, 웹, 서버 파트와 함께 링커리어 현직자에게 피드백을 받은 링커리어 모바일 웹 리디자인 프로젝트',
     descriptionEn:

@@ -13,10 +13,10 @@ export type Lang = 'ko' | 'en';
 const STRINGS = {
   ko: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': '기다리지 않고,',
-    'home.headline2': '만들어 냅니다.',
+    'home.headline1': '문제에서,',
+    'home.headline2': '결과까지.',
     'home.sub':
-      '웹 화면부터 드론 비행제어기, 로켓 엔진 시뮬레이터까지 — 프로덕트든 데이터든 결과물이든, 필요하면 피벗도 마다하지 않고 결국 만들어 냅니다.',
+      '웹 화면부터 드론 비행제어기, 로켓 엔진 시뮬레이터까지.\n분야보다 문제를, 기술보다 완성을 우선합니다.',
     'home.viewProjects': '프로젝트 보기 →',
     'home.about': '프로필',
     'home.highlightsOverline': 'At a Glance',
@@ -28,7 +28,8 @@ const STRINGS = {
     'projects.works': 'Projects',
     'projects.intro':
       '간단한 아이디어를 확장하고, 여러 개발 도구로 구현하여 효과적으로 실력을 기르려 노력합니다.',
-    'projects.hint': '각 프로젝트를 누르면 코드·상세 설명·추가 사진을 볼 수 있어요.',
+    'projects.hint':
+      '각 프로젝트를 누르면 코드·상세 설명·추가 사진을 볼 수 있어요.',
     'sort.newest': '최신순',
     'sort.oldest': '시간순',
     'filter.all': '전체',
@@ -60,10 +61,10 @@ const STRINGS = {
   },
   en: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': "I don't wait —",
-    'home.headline2': 'I make it happen.',
+    'home.headline1': 'From problem',
+    'home.headline2': 'To product.',
     'home.sub':
-      'From web screens to a drone flight controller and a rocket-engine simulator — a product, data, or any deliverable, pivoting when it takes one, I always end up making something.',
+      'From web interfaces to drone flight controllers and rocket engine simulators.\nProblems over domains. Completion over technology.',
     'home.viewProjects': 'View Projects →',
     'home.about': 'About',
     'home.highlightsOverline': 'At a Glance',

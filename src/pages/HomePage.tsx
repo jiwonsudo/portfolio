@@ -159,7 +159,7 @@ export default function HomePage() {
             <br />
             {t('home.headline2')}
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-neutral-600 md:text-lg break-keep whitespace-pre-line">
             {t('home.sub')}
           </p>
 
