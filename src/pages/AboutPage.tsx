@@ -1,3 +1,4 @@
+import { trackEvent } from '../analytics';
 import Footer from '../components/Footer';
 import Highlights from '../components/Highlights';
 import Timeline from '../components/Timeline';
@@ -95,6 +96,7 @@ export default function AboutPage() {
             <a
               className="rounded-full border border-neutral-300 bg-white/70 px-5 py-2.5 text-sm font-bold text-neutral-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
               href={profile.resume}
+              onClick={() => trackEvent('resume-click-about', 'Resume · About')}
               rel="noreferrer"
               target="_blank"
             >

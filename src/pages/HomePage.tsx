@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { trackEvent } from '../analytics';
 import DeviceFrame from '../components/DeviceFrame';
 import Footer from '../components/Footer';
 import Highlights from '../components/Highlights';
@@ -195,6 +196,7 @@ export default function HomePage() {
                         label: t('common.resume'),
                         href: profile.resume,
                         ext: true,
+                        event: 'resume-click-home',
                       },
                     ]
                   : []),
@@ -206,6 +208,11 @@ export default function HomePage() {
                   className="underline-offset-4 transition-colors hover:text-neutral-900 hover:underline"
                   href={s.href}
                   key={s.label}
+                  onClick={
+                    s.event
+                      ? () => trackEvent(s.event, 'Resume · Home')
+                      : undefined
+                  }
                   rel={s.ext ? 'noreferrer' : undefined}
                   target={s.ext ? '_blank' : undefined}
                 >

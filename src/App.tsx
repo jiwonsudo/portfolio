@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { trackPageview } from './analytics';
 import Nav from './components/Nav';
 import { useLang } from './i18n';
 import AboutPage from './pages/AboutPage';
@@ -17,6 +18,17 @@ function ScrollToTop() {
   return null;
 }
 
+/** SPA는 최초 로드 때만 집계되므로, 라우트가 바뀔 때마다 페이지뷰를 보낸다. */
+function TrackPageviews() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    trackPageview(pathname);
+  }, [pathname]);
+
+  return null;
+}
+
 export default function App() {
   const { t } = useLang();
 
@@ -29,6 +41,7 @@ export default function App() {
         {t('common.skip')}
       </a>
       <ScrollToTop />
+      <TrackPageviews />
       <Nav />
       <div id="content" tabIndex={-1}>
         <Routes>

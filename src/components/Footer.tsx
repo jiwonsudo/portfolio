@@ -1,3 +1,4 @@
+import { trackEvent } from '../analytics';
 import { profile } from '../data/profile';
 import { useLang } from '../i18n';
 
@@ -48,6 +49,7 @@ export default function Footer() {
           <a
             className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-5 py-2.5 text-sm font-bold text-neutral-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-300 hover:shadow-lg hover:shadow-neutral-300/60"
             href={profile.resume}
+            onClick={() => trackEvent('resume-click-footer', 'Resume · Footer')}
             rel="noreferrer"
             target="_blank"
           >
