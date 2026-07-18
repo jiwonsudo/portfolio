@@ -24,7 +24,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   <text x="86" y="285" font-family="'Apple SD Gothic Neo', AppleGothic, Helvetica, sans-serif" font-size="90" font-weight="800"
         fill="#141414">정지원 · Jiwon Jeong</text>
   <text x="90" y="385" font-family="'Apple SD Gothic Neo', AppleGothic, sans-serif" font-size="46" font-weight="700"
-        fill="#3f4653">기다리지 않고, 만들어 냅니다.</text>
+        fill="#3f4653">문제에서, 결과까지.</text>
   <text x="90" y="560" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="700"
         fill="#a3a8b2">github.com/jiwonsudo</text>
 </svg>`;
