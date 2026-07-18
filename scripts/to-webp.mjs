@@ -28,7 +28,9 @@ async function* walk(dir) {
 }
 
 const fmt = (b) =>
-  b >= 1024 * 1024 ? `${(b / 1024 / 1024).toFixed(2)}MB` : `${Math.round(b / 1024)}KB`;
+  b >= 1024 * 1024
+    ? `${(b / 1024 / 1024).toFixed(2)}MB`
+    : `${Math.round(b / 1024)}KB`;
 
 const exists = (p) =>
   stat(p).then(

@@ -11,7 +11,14 @@
 //        pnpm compress:images 1600 mockups   (대상 폴더 변경)
 //        pnpm compress:images 1600 projects --force   (manifest 무시하고 강제 재압축)
 
-import { readdir, stat, rename, unlink, readFile, writeFile } from 'node:fs/promises';
+import {
+  readdir,
+  stat,
+  rename,
+  unlink,
+  readFile,
+  writeFile,
+} from 'node:fs/promises';
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
@@ -42,11 +49,17 @@ async function* walk(dir) {
 
 const sha = (buf) => createHash('sha256').update(buf).digest('hex');
 const fmt = (b) =>
-  b >= 1024 * 1024 ? `${(b / 1024 / 1024).toFixed(2)}MB` : `${Math.round(b / 1024)}KB`;
+  b >= 1024 * 1024
+    ? `${(b / 1024 / 1024).toFixed(2)}MB`
+    : `${Math.round(b / 1024)}KB`;
 
 function encode(pipeline, ext) {
   if (ext === '.png')
-    return pipeline.png({ compressionLevel: 9, palette: true, quality: QUALITY });
+    return pipeline.png({
+      compressionLevel: 9,
+      palette: true,
+      quality: QUALITY,
+    });
   if (ext === '.webp') return pipeline.webp({ quality: QUALITY });
   return pipeline.jpeg({ quality: QUALITY, mozjpeg: true });
 }
@@ -61,7 +74,10 @@ async function loadManifest() {
 }
 
 async function saveManifest(done) {
-  const json = { note: '이 파일은 이미 압축된 이미지의 해시 목록입니다. 삭제하지 마세요(재압축→화질 열화 방지). 커밋 권장.', done: [...done].sort() };
+  const json = {
+    note: '이 파일은 이미 압축된 이미지의 해시 목록입니다. 삭제하지 마세요(재압축→화질 열화 방지). 커밋 권장.',
+    done: [...done].sort(),
+  };
   await writeFile(MANIFEST_PATH, JSON.stringify(json, null, 2) + '\n');
 }
 
@@ -120,7 +136,9 @@ async function main() {
         totalBefore += before.length;
         totalAfter += after.length;
         const pct = Math.round((1 - after.length / before.length) * 100);
-        console.log(`  ✅ ${rel}\n     ${fmt(before.length)} → ${fmt(after.length)} (-${pct}%)`);
+        console.log(
+          `  ✅ ${rel}\n     ${fmt(before.length)} → ${fmt(after.length)} (-${pct}%)`,
+        );
         done.add(sha(after)); // 최종본(압축된) 해시 기록
       } else {
         await unlink(tmp);

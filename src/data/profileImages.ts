@@ -4,10 +4,10 @@
  *   src/assets/profile/설명/*   → 나머지(뒤에 겹쳐 보이는 미리보기 + 모달 갤러리)
  * 파일만 넣으면 자동으로 잡힌다(파일명 순 정렬).
  */
-const modules = import.meta.glob(
-  '../assets/profile/*/*.{png,jpg,jpeg,webp}',
-  { eager: true, import: 'default' },
-) as Record<string, string>;
+const modules = import.meta.glob('../assets/profile/*/*.{png,jpg,jpeg,webp}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
 
 // macOS 파일명은 NFD로 저장될 수 있어 정규화 후 비교한다.
 const REPRESENTATIVE = '대표'.normalize('NFC');

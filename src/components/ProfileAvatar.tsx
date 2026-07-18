@@ -32,11 +32,7 @@ export default function ProfileAvatar({ alt }: { alt: string }) {
                 className={`pk pk${i + 1} absolute inset-0 overflow-hidden rounded-full ring-4 ring-white/80`}
                 key={src}
               >
-                <img
-                  alt=""
-                  className="h-full w-full object-cover"
-                  src={src}
-                />
+                <img alt="" className="h-full w-full object-cover" src={src} />
               </span>
             ))
           : null}

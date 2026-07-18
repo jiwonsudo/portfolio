@@ -75,7 +75,9 @@ export default function ProjectCard({
                   color: `color-mix(in srgb, ${c} 48%, black)`,
                 }}
               >
-                {lang === 'en' ? categoryMeta[cat].label : categoryMeta[cat].labelKo}
+                {lang === 'en'
+                  ? categoryMeta[cat].label
+                  : categoryMeta[cat].labelKo}
               </span>
             );
           })}

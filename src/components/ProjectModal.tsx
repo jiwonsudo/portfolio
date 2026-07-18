@@ -227,7 +227,9 @@ export default function ProjectModal({
                     className="underline underline-offset-4 transition-opacity hover:opacity-60"
                     href={project.demoUrl}
                     rel="noreferrer"
-                    style={{ color: `color-mix(in srgb, ${accent} 48%, black)` }}
+                    style={{
+                      color: `color-mix(in srgb, ${accent} 48%, black)`,
+                    }}
                     target="_blank"
                   >
                     Demo ↗
