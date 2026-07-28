@@ -104,7 +104,7 @@ export const credentials: Credential[] = [
 
 export const experiences: TimelineEntry[] = [
   {
-    period: 'Feb 2026 – Jul 2026',
+    period: 'Mar 2026 – Jul 2026',
     title: "Let's SOPT 38기 웹파트 수료",
     titleEn: "Let's SOPT (38th) · Web part",
     cert: certs.find((c) => c.name.includes('SOPT')),
@@ -115,7 +115,7 @@ export const experiences: TimelineEntry[] = [
     titleEn: 'Worked in Hardware & Linux Management at DIAS ICT',
   },
   {
-    period: 'Mar 2023 – Dec 2023',
+    period: 'Jan 2023 – Dec 2023',
     title: '멋쟁이사자처럼 대학 11기 프론트엔드 수료',
     titleEn: 'LIKELION UNIV (11th) · Front-End',
     cert: certs.find((c) => c.name.includes('멋쟁이사자처럼')),
