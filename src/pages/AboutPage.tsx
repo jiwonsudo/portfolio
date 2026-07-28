@@ -11,7 +11,7 @@ import {
   profile,
 } from '../data/profile';
 import { techCategoryOrder, techMeta } from '../data/techMeta';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 import ProfileAvatar from '../components/ProfileAvatar';
 
 // Footer·Home과 동일한 순서로 통일

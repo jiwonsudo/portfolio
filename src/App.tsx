@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { trackPageview } from './analytics';
 import Nav from './components/Nav';
-import { useLang } from './i18n';
+import { useLang } from './useLang';
 import AboutPage from './pages/AboutPage';
 import HomePage from './pages/HomePage';
 import NotFound from './pages/NotFound';

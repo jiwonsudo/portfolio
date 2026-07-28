@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { Cert } from '../data/certImages';
 import type { TimelineEntry } from '../data/profile';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 import ImageModal from './ImageModal';
 
 export default function Timeline({

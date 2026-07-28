@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import { useLang, type Lang } from '../i18n';
+import type { Lang } from '../i18n';
+import { useLang } from '../useLang';
 
 const links = [
   { labelKo: '홈', labelEn: 'Home', to: '/' },

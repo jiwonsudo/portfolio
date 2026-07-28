@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 import { profilePhoto, profilePreviews } from '../data/profileImages';
 import ProfilePhotosModal from './ProfilePhotosModal';
 

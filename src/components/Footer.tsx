@@ -1,6 +1,6 @@
 import { trackEvent } from '../analytics';
 import { profile } from '../data/profile';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 
 // 요일별 멘트 (index = new Date().getDay(), 0=일 ~ 6=토)
 const DAY_MESSAGES = {

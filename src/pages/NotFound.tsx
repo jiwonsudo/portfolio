@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 
 export default function NotFound() {
   const { t } = useLang();

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { categoryMeta, roleLabel } from '../data/projects';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 import type { Project } from '../types';
 
 export default function ProjectModal({

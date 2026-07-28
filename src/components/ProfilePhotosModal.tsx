@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 
 /**
  * About 아바타를 누르면 뜨는 사진 갤러리 모달(프로젝트 모달과 동일한 큰 흰 패널).

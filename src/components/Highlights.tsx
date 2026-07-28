@@ -1,5 +1,5 @@
 import { highlights } from '../data/profile';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 import Reveal from './Reveal';
 
 /** 핵심 성과 하이라이트 카드 그리드 (About·Home 공용) */

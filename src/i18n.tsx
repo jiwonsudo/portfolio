@@ -1,11 +1,5 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-  type ReactNode,
-} from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
+import { LangContext } from './lang-context';
 
 export type Lang = 'ko' | 'en';
 
@@ -13,10 +7,10 @@ export type Lang = 'ko' | 'en';
 const STRINGS = {
   ko: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': '문제에서,',
-    'home.headline2': '결과까지.',
+    'home.headline1': '서비스를 만들고',
+    'home.headline2': '데이터로 키우는 엔지니어',
     'home.sub':
-      '웹 화면부터 드론 비행제어기, 로켓 엔진 시뮬레이터까지.\n분야보다 문제를, 기술보다 완성을 우선합니다.',
+      '문제를 찾고, 고치고, 다시 만듭니다. 프론트엔드 개발자 정지원입니다.',
     'home.viewProjects': '프로젝트 보기 →',
     'home.about': '프로필',
     'home.highlightsOverline': 'At a Glance',
@@ -62,10 +56,9 @@ const STRINGS = {
   },
   en: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': 'From problem',
-    'home.headline2': 'To product.',
-    'home.sub':
-      'From web interfaces to drone flight controllers and rocket engine simulators.\nProblems over domains. Completion over technology.',
+    'home.headline1': 'I build products',
+    'home.headline2': 'and grow them with data.',
+    'home.sub': 'Find the problem, fix it, ship again.',
     'home.viewProjects': 'View Projects →',
     'home.about': 'About',
     'home.highlightsOverline': 'At a Glance',
@@ -113,17 +106,6 @@ const STRINGS = {
 
 export type StringKey = keyof (typeof STRINGS)['ko'];
 
-type LangContextValue = {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
-  toggle: () => void;
-  t: (key: StringKey) => string;
-  /** 팀 규모 문구 */
-  team: (size: number) => string;
-};
-
-const LangContext = createContext<LangContextValue | null>(null);
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => {
     if (typeof localStorage !== 'undefined') {
@@ -163,11 +145,4 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       {children}
     </LangContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useLang(): LangContextValue {
-  const ctx = useContext(LangContext);
-  if (!ctx) throw new Error('useLang must be used within LanguageProvider');
-  return ctx;
 }
