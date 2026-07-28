@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { trackEvent } from '../analytics';
 import DeviceFrame from '../components/DeviceFrame';
@@ -14,7 +14,7 @@ import {
   roleLabel,
 } from '../data/projects';
 import { profile } from '../data/profile';
-import { useLang } from '../i18n';
+import { useLang } from '../useLang';
 import type { Project } from '../types';
 
 // 굵은 파이프라인 — 정점(좌) → 중앙 교차 → 저점(우)으로 흐르는 S 웨이브.
@@ -127,10 +127,18 @@ export default function HomePage() {
         .join(' · ')
     : '';
 
+  // 홈 화면에서만 섹션 스크롤 스냅 — 다른 페이지로 이동하면 해제.
+  useEffect(() => {
+    document.documentElement.classList.add('snap-y', 'snap-mandatory');
+    return () => {
+      document.documentElement.classList.remove('snap-y', 'snap-mandatory');
+    };
+  }, []);
+
   return (
     <main className="bg-white">
       {/* ── 히어로 (파이프라인) ── */}
-      <section className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 text-center">
+      <section className="relative flex min-h-svh snap-start flex-col items-center justify-center overflow-hidden px-6 text-center">
         {/* 모든 화면에서 동일하게 보이도록 meet(전체 표시)로 통일 →
             화면 크기·비율과 무관하게 구불거림 횟수·색 스펙트럼(빨강~보라)이 항상 같다.
             굵기는 strokeWidth, 위아래 여백은 viewBox 높이로 조절. */}
@@ -151,11 +159,17 @@ export default function HomePage() {
           viewBox="-90 60 1380 380"
         />
 
-        <div className="relative z-10 max-w-3xl [text-shadow:0_0_1px_rgba(255,255,255,0.5)]">
+        <div className="relative z-10 max-w-4xl [text-shadow:0_0_1px_rgba(255,255,255,0.5)]">
           <p className="mb-5 text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
             {t('home.role')}
           </p>
-          <h1 className="text-[clamp(2.6rem,7vw,5rem)] leading-tight font-extrabold tracking-tight text-neutral-900">
+          <h1
+            className={
+              lang === 'en'
+                ? 'text-[clamp(1.75rem,6vw,4.6rem)] leading-tight font-extrabold tracking-tight text-neutral-900 break-keep'
+                : 'text-[clamp(2.2rem,7vw,5rem)] leading-tight font-extrabold tracking-tight text-neutral-900 break-keep'
+            }
+          >
             {t('home.headline1')}
             <br />
             {t('home.headline2')}
@@ -225,7 +239,7 @@ export default function HomePage() {
       </section>
 
       {/* ── 성과 하이라이트 ── */}
-      <section className="relative px-6 pt-16 md:pt-20">
+      <section className="relative snap-start scroll-mt-24 px-6 pt-16 md:pt-20">
         <div className="mx-auto max-w-6xl">
           <Reveal>
             <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
@@ -241,7 +255,7 @@ export default function HomePage() {
 
       {/* ── Featured Works ── */}
       {hero ? (
-        <section className="relative px-6 pt-16 pb-24 md:pt-20 md:pb-32">
+        <section className="relative snap-start scroll-mt-24 px-6 pt-16 pb-24 md:pt-20 md:pb-32">
           <Reveal className="mx-auto max-w-6xl">
             <p className="text-xs font-extrabold tracking-[0.3em] uppercase text-neutral-500">
               {t('home.selectedWork')}
@@ -364,7 +378,7 @@ export default function HomePage() {
       ) : null}
 
       {/* ── 마무리 outro ── */}
-      <section className="relative px-6 pt-8 pb-24 text-center md:pb-32">
+      <section className="relative snap-start scroll-mt-24 px-6 pt-8 pb-24 text-center md:pb-32">
         <Reveal className="mx-auto max-w-2xl">
           <h2 className="text-[clamp(1.8rem,5vw,3rem)] leading-tight font-extrabold text-neutral-900">
             {t('contact.footerTitle')}

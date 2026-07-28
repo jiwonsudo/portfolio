@@ -19,7 +19,7 @@
 html {
   scroll-behavior: smooth;
   background: #ffffff;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 @keyframes label-in {
@@ -65,7 +65,7 @@ body {
   max-width: 100%;
   background: #ffffff;
   font-family: var(--font-sans);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* 홀로그램/포일 성과 배지 — 은은한 무지개빛이 흐르고 광택이 훑어 반짝인다 */
