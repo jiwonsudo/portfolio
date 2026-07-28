@@ -1,7 +1,12 @@
+import { certs } from './certImages';
+import type { Cert } from './certImages';
+
 export type TimelineEntry = {
   period: string;
   title: string;
   titleEn: string;
+  /** 이 항목의 수료증/증명서 (있으면 작은 확인 버튼이 노출됨) */
+  cert?: Cert;
 };
 
 export type Highlight = {
@@ -100,8 +105,9 @@ export const credentials: Credential[] = [
 export const experiences: TimelineEntry[] = [
   {
     period: 'Feb 2026 – Jul 2026',
-    title: "Let's SOPT 38기 웹파트",
+    title: "Let's SOPT 38기 웹파트 수료",
     titleEn: "Let's SOPT (38th) · Web part",
+    cert: certs.find((c) => c.name.includes('SOPT')),
   },
   {
     period: 'Jan 2024 – Jun 2024',
@@ -109,13 +115,14 @@ export const experiences: TimelineEntry[] = [
     titleEn: 'Worked in Hardware & Linux Management at DIAS ICT',
   },
   {
-    period: 'Mar 2023 – Aug 2023',
-    title: '멋쟁이사자처럼 대학 11기 프론트엔드',
+    period: 'Mar 2023 – Dec 2023',
+    title: '멋쟁이사자처럼 대학 11기 프론트엔드 수료',
     titleEn: 'LIKELION UNIV (11th) · Front-End',
+    cert: certs.find((c) => c.name.includes('멋쟁이사자처럼')),
   },
   {
     period: 'Mar 2021 – Feb 2023',
-    title: '고교 소프트웨어 중점 교육과정',
+    title: '고교 소프트웨어 중점 교육과정 수료',
     titleEn: 'High school SW Intensive Education Course',
   },
   {

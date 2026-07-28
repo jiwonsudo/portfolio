@@ -1,5 +1,8 @@
+import { useState } from 'react';
+import type { Cert } from '../data/certImages';
 import type { TimelineEntry } from '../data/profile';
 import { useLang } from '../i18n';
+import ImageModal from './ImageModal';
 
 export default function Timeline({
   entries,
@@ -11,7 +14,8 @@ export default function Timeline({
   /** 섹션 액센트 컬러 */
   accent: string;
 }) {
-  const { lang } = useLang();
+  const { lang, t } = useLang();
+  const [openCert, setOpenCert] = useState<Cert | null>(null);
 
   return (
     <div>
@@ -39,7 +43,7 @@ export default function Timeline({
               style={{ backgroundColor: accent }}
             />
             <span
-              className="inline-block rounded-full px-2 py-0.5 text-[10px] font-bold"
+              className="inline-block rounded-full mb-2 px-2 py-1 text-[10px] font-bold"
               style={{
                 backgroundColor: `color-mix(in srgb, ${accent} 14%, white)`,
                 color: `color-mix(in srgb, ${accent} 48%, black)`,
@@ -47,15 +51,37 @@ export default function Timeline({
             >
               {entry.period}
             </span>
-            <p className="mt-1.5 text-sm leading-snug font-extrabold text-neutral-900">
-              {lang === 'en' ? entry.titleEn : entry.title}
-            </p>
-            <p className="text-xs text-neutral-500">
+            <div className="mx-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+              <p className="text-sm leading-snug font-extrabold text-neutral-900">
+                {lang === 'en' ? entry.titleEn : entry.title}
+              </p>
+              {entry.cert ? (
+                <button
+                  className="shrink-0 rounded-full border border-neutral-300 px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setOpenCert(entry.cert!);
+                  }}
+                  type="button"
+                >
+                  {t('about.certConfirm')} ↗
+                </button>
+              ) : null}
+            </div>
+            <p className="pl-1.5 pt-1.5 text-xs text-neutral-500">
               {lang === 'en' ? entry.title : entry.titleEn}
             </p>
           </li>
         ))}
       </ul>
+
+      {openCert ? (
+        <ImageModal
+          alt={openCert.name}
+          onClose={() => setOpenCert(null)}
+          src={openCert.src}
+        />
+      ) : null}
     </div>
   );
 }
