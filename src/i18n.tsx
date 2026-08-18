@@ -58,7 +58,7 @@ const STRINGS = {
     'home.headline1': 'I build, measure,',
     'home.headline2': 'and refine.',
     'home.sub':
-      'I turn problems into services, then validate and refine with data. Jiwon Jeong, front-end engineer.',
+      'I solve problems by building services, then validate and refine with data. I am Jiwon Jeong, front-end engineer.',
     'home.viewProjects': 'View Projects →',
     'home.about': 'About',
     'home.highlightsOverline': 'At a Glance',
