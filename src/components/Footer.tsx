@@ -42,7 +42,6 @@ export default function Footer() {
           className="inline-flex items-center gap-2 rounded-full border border-transparent bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-neutral-300/60"
           href={`mailto:${profile.email}`}
         >
-          <span aria-hidden>✉</span>
           {t('contact.email')}
         </a>
         {profile.resume ? (

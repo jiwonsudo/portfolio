@@ -40,7 +40,6 @@ const STRINGS = {
     'common.featured': 'Featured',
     'common.skip': '본문으로 건너뛰기',
     'common.resume': '이력서',
-    'contact.cta': '연락하기',
     'contact.email': '이메일 보내기',
     'contact.footerTitle': '새로운 기회를 찾고 있어요 👋',
     'contact.ready':
@@ -88,7 +87,6 @@ const STRINGS = {
     'common.featured': 'Featured',
     'common.skip': 'Skip to content',
     'common.resume': 'Resume',
-    'contact.cta': 'Get in touch',
     'contact.email': 'Email me',
     'contact.footerTitle': 'Open to new adventures 👋',
     'contact.ready':

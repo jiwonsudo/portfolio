@@ -191,11 +191,10 @@ export default function HomePage() {
           {/* 연락 / 외부 링크 — 이메일은 accent 톤의 작은 pill로 구분 */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-shadow-none">
             <a
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#6366f1]/30 bg-[#6366f1]/10 px-4 py-2 text-sm font-bold text-[#4f46e5] transition-colors hover:border-[#6366f1]/50 hover:bg-[#6366f1]/20"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm font-bold text-neutral-700 transition-colors hover:border-neutral-300 hover:bg-neutral-100"
               href={`mailto:${profile.email}`}
             >
-              <span aria-hidden>✉</span>
-              {t('contact.cta')}
+              {t('contact.email')}
             </a>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-xs font-bold text-neutral-500">
               {[
@@ -385,7 +384,6 @@ export default function HomePage() {
             className="mt-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
             href={`mailto:${profile.email}`}
           >
-            <span aria-hidden>✉</span>
             {t('contact.email')}
           </a>
           <p className="mt-10 text-sm text-neutral-400 break-keep">
