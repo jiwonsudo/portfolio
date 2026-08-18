@@ -106,6 +106,41 @@ function imagesFor(slug: string): Pick<Project, 'image' | 'gallery'> {
  */
 const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
   {
+    slug: 'smuon',
+    title: 'SMUON',
+    titleKo: '스뮤온 | 상명대학교 서버상태 확인',
+    categories: ['Web', 'Backend'],
+    display: 'mobile',
+    date: 'May 2025',
+    role: '1인 개발',
+    description:
+      '상명대학교 주요 웹서비스의 서버 상태 현황을 확인할 수 있는 웹서비스',
+    descriptionEn:
+      "A web service that allows you to check the server status of Sangmyung University's major web services",
+    detail:
+      "상명대학교 이캠퍼스 서버가 2025년 5월 연휴 전에 다운되어, 학생들이 서버 상태를 확인하지 못하였습니다. 페이지 분석 결과 Connection Timed Out이 발생하여 유저들이 에러 원인조차 파악할 수 없이 빈 화면만 보는 것을 보고 빠르게 상명대 주요 홈페이지 서버 Status 홈페이지를 제작, 배포했습니다. Codespaces에서 CRA(Create-React-App), React 프로젝트로 제작, 스타일링에는 Styled-components 사용, 배포는 Vercel 사용했습니다. 첫 백엔드로 인한 언어 접근성과 제한적인 컴퓨팅 리소스를 사용해야 하는 군대라는 개발 환경 특성을 고려, 가벼운 Express.JS를 사용했습니다. 구글 애널리틱스를 웹에 임베드하여, 웹에서 발생하는 이벤트와 사용자 수를 조사하였습니다. 에브리타임에 웹서비스 공지 글을 올린 결과, 좋아요를 100개 이상 받으며 Hot 게시물에까지 올라갔습니다. 2025/6/2, 상명대학교 이캠퍼스 서버가 정상화되며 사용자 감소하여 유저 1,088명 확보 후 서버를 종료했습니다. 그러나 이후 2026년 8월, 이캠퍼스 서버가 다시 마비되는 것을 보고 리디자인을 진행해 재오픈했습니다. 프론트엔드는 SEO 최적화에 유리한 Next.js로, 백엔드는 Render 프리티어 환경에서 콜드 스타트를 빠르게 가져가기 위해 Go로 교체했으며, 디스코드로 서버 상태를 즉시 알림 받을 수 있는 기능도 추가했습니다. SEO·Lighthouse 최적화와 구글 서치콘솔 등록도 함께 진행해, 구글에서 '상명대 서버'로 검색하면 사이트가 5위에 노출되는 성과를 얻었습니다. 다만 개강 전이었던 탓에 이캠퍼스 자체 접속자가 많지 않아 새 접속자는 약 150명 정도였고, 2026/8/16 기준 활성 사용자 1,245명을 모집했습니다.",
+    stack: [
+      'Next.js',
+      'Go',
+      'Supabase',
+      'React',
+      'Axios',
+      'Express.js',
+      'Styled-Components',
+      'Vercel',
+      'Render',
+      'Google Analytics',
+    ],
+    detailEn:
+      "Sangmyung University's e-Campus server went down right before the May 2025 holiday, leaving students unable to check its status. Digging into it, I found requests were failing with Connection Timed Out — users couldn't even tell what was wrong, just a blank screen — so I quickly built and shipped a status page for SMU's main services. It was a CRA (Create React App) React project built in Codespaces, styled with Styled-Components and deployed on Vercel. For my first backend, given both my limited language experience and the limited compute available while developing from the army, I went with the lightweight Express.js. I embedded Google Analytics to track site events and user counts. A notice post on Everytime got 100+ likes and hit the Hot board. On 2025/6/2, e-Campus recovered, usage dropped, and I shut the server down after reaching 1,088 users. But when e-Campus went down again in August 2026, I redesigned and relaunched the service. I rebuilt the front-end with Next.js for better SEO, replaced the back-end with Go for fast cold starts on Render's free tier, and added instant Discord alerts for server status. I also optimized for SEO and Lighthouse scores and registered with Google Search Console — the site now ranks 5th on Google for the search \"상명대 서버\" (SMU server). Since it launched before the semester started, e-Campus itself saw fewer visitors — only about 150 new users — and as of 2026/8/16 the service has 1,245 active users.",
+    demoUrl: 'https://www.issmuok.site',
+    demoLabel: 'Site',
+    githubUrl: 'https://github.com/jiwonsudo/SMU-Server-Status-Viewer',
+    featured: true,
+    highlight: '활성 사용자 1,245명',
+    highlightEn: '1,245 active users',
+  },
+  {
     slug: 'finch',
     title: 'Finch',
     titleKo: '핀치',
@@ -198,36 +233,6 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
     featured: true,
     highlight: '현직자 피드백',
     highlightEn: 'Expert feedback',
-  },
-  {
-    slug: 'smu-server-status-viewer',
-    title: 'SMU-Server-Status-Viewer',
-    titleKo: '상명대학교 서버상태 확인',
-    categories: ['Web', 'Backend'],
-    display: 'mobile',
-    date: 'May 2025',
-    role: '1인 개발',
-    description:
-      '상명대학교 주요 웹서비스의 서버 상태 현황을 확인할 수 있는 웹서비스',
-    descriptionEn:
-      "A web service that allows you to check the server status of Sangmyung University's major web services",
-    detail:
-      '상명대학교 이캠퍼스가 2025년 5월 연휴 전에 터져서 학생들이 서버 상태를 확인하지 못하고 Connection Timed Out 에러가 뜨는 것을 보고 빠르게 상명대 주요 홈페이지 서버 Status 홈페이지를 싸지방에서 만들어 올리게 되었습니다. Codespaces에서 CRA(Create-React-App), React 프로젝트로 제작, 스타일링에는 Styled-components 사용, 배포는 Vercel 사용했습니다. 첫 백엔드로 인한 언어 접근성을 고려, 또한 군대에서 개발을 위해 가벼운 Express.JS 사용했습니다. 구글 애널리틱스를 웹에 임베드하여 사용하여 웹에서 발생하는 이벤트와 사용자 수를 조사하였습니다. 구글 애널리틱스 사용하여 웹 이벤트 발생과 DAU, MAU 트래킹하였음. 에브리타임에 학교 서버가 다운된 시점에 마케팅 글을 올린 결과, 좋아요를 100개 이상 받으며 Hot 게시물에 올라갔습니다. 2025/6/2, 상명대학교 이캠퍼스 서버가 정상화되며 사용자 감소하여 최종 유저 1,088명 확보 후 서버 종료했습니다. 첫 백엔드 서버를 구축해본 점, 실제 제한적이나 마케팅을 통해 유저를 확보하고 처음으로 분석 툴을 사용해 유저 트래픽을 조사해 본 점은 긍정적이나, 서비스 특성상 유저 리텐션을 확보하지 못한 것이 아쉽습니다.',
-    stack: [
-      'React',
-      'Axios',
-      'Express.js',
-      'Styled-Components',
-      'Vercel',
-      'Render',
-      'Google Analytics',
-    ],
-    detailEn:
-      "When SMU's e-Campus went down right before the May 2025 holiday and students only saw Connection Timed Out errors, I quickly built and shipped a status page for SMU's main services from the army internet café. Built as a CRA React project in Codespaces, styled with Styled-Components and deployed on Vercel. For my first backend I chose the lightweight Express.js — partly for language accessibility and to keep developing inside the army. I embedded Google Analytics to track web events and users (DAU/MAU). A marketing post on Everytime at the moment the server went down got 100+ likes and hit the Hot board. On 2025/6/2 e-Campus recovered, usage dropped, and I shut the server down after reaching 1,088 total users. Standing up my first backend and — in a limited way — acquiring users through marketing and analyzing traffic with an analytics tool for the first time were positive, though retention was hard to secure given the nature of the service.",
-    githubUrl: 'https://github.com/jiwonsudo/SMU-Server-Status-Viewer',
-    featured: true,
-    highlight: '실사용자 1,088명',
-    highlightEn: '1,088 real users',
   },
   {
     slug: 'storyrail',

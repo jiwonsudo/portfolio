@@ -38,6 +38,8 @@ export type Project = {
   stack: string[];
   githubUrl?: string;
   demoUrl?: string;
+  /** demoUrl 링크 라벨 (기본값 'Demo'). 실서비스라면 'Site' 등으로 바꿔 표기 */
+  demoLabel?: string;
   /** 대표 스크린샷 (기기 프레임 안에 전시) */
   image?: string;
   /** 모달 캐러셀용 추가 사진들 — 생략 시 image 하나로 대체 */

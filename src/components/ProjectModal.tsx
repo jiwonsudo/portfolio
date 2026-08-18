@@ -232,7 +232,7 @@ export default function ProjectModal({
                     }}
                     target="_blank"
                   >
-                    Demo ↗
+                    {project.demoLabel ?? 'Demo'} ↗
                   </a>
                 ) : null}
                 {project.githubUrl ? (
