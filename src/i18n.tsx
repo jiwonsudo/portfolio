@@ -7,10 +7,10 @@ export type Lang = 'ko' | 'en';
 const STRINGS = {
   ko: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': '서비스를 만들고',
-    'home.headline2': '데이터로 키우는 엔지니어',
+    'home.headline1': '만들고, 측정하고,',
+    'home.headline2': '다듬습니다.',
     'home.sub':
-      '문제를 찾고, 고치고, 다시 만듭니다. 프론트엔드 개발자 정지원입니다.',
+      '서비스로서 문제를 해결하고, 지표로 검증해 다듬는, 프론트엔드 개발자 정지원입니다.',
     'home.viewProjects': '프로젝트 보기 →',
     'home.about': '프로필',
     'home.highlightsOverline': 'At a Glance',
@@ -55,9 +55,10 @@ const STRINGS = {
   },
   en: {
     'home.role': 'Frontend-based Software Engineer',
-    'home.headline1': 'I build products',
-    'home.headline2': 'and grow them with data.',
-    'home.sub': 'Find the problem, fix it, ship again.',
+    'home.headline1': 'I build, measure,',
+    'home.headline2': 'and refine.',
+    'home.sub':
+      'I turn problems into services, then validate and refine with data. Jiwon Jeong, front-end engineer.',
     'home.viewProjects': 'View Projects →',
     'home.about': 'About',
     'home.highlightsOverline': 'At a Glance',
