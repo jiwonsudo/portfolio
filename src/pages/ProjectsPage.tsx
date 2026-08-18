@@ -49,10 +49,14 @@ export default function ProjectsPage() {
       ? projectList
       : projectList.filter((project) => project.categories.includes(filter));
 
-  // featured는 항상 맨 위 고정, 그 외엔 선택한 순서(date)대로 정렬
+  // featured는 항상 맨 위 고정(그 안에서는 data/projects.ts 배열 순서 그대로),
+  // 그 외엔 선택한 순서(date)대로 정렬
   const sorted = [...filtered].sort((a, b) => {
     if (Boolean(a.featured) !== Boolean(b.featured)) {
       return a.featured ? -1 : 1;
+    }
+    if (a.featured && b.featured) {
+      return projectList.indexOf(a) - projectList.indexOf(b);
     }
     const diff = dateSortKey(a.date) - dateSortKey(b.date);
     return sortOrder === 'newest' ? -diff : diff;
