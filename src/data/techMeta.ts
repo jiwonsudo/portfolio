@@ -227,20 +227,20 @@ export const techMeta: Record<string, TechMeta> = {
     color: '#4B8BBE',
     category: 'AI/ML',
   },
-  STT: {
-    url: 'https://en.wikipedia.org/wiki/Speech_recognition',
+  SpeechRecognition: {
+    url: 'https://pypi.org/project/SpeechRecognition/',
     color: '#0EA5E9',
     category: 'AI/ML',
   },
-  TTS: {
-    url: 'https://en.wikipedia.org/wiki/Speech_synthesis',
+  gTTS: {
+    url: 'https://gtts.readthedocs.io',
     color: '#8B5CF6',
     category: 'AI/ML',
   },
   BeautifulSoup: {
     url: 'https://www.crummy.com/software/BeautifulSoup/',
     color: '#4F8A10',
-    category: 'Backend',
+    category: 'AI/ML',
   },
   Vercel: {
     url: 'https://vercel.com',

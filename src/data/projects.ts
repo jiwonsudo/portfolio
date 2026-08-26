@@ -391,8 +391,8 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
       'Keras',
       'NumPy',
       'Pickle',
-      'STT',
-      'TTS',
+      'SpeechRecognition',
+      'gTTS',
       'BeautifulSoup',
     ],
     detailEn:
