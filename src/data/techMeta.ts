@@ -39,6 +39,11 @@ export const techCategoryOrder: TechCategory[] = [
  * (여기 없는 스택은 About에서 '기타' 그룹의 회색 칩으로 자동 노출된다)
  */
 export const techMeta: Record<string, TechMeta> = {
+  'Next.js': {
+    url: 'https://nextjs.org',
+    color: '#000000',
+    category: 'Frontend',
+  },
   React: {
     url: 'https://react.dev',
     color: '#61DAFB',
@@ -139,6 +144,11 @@ export const techMeta: Record<string, TechMeta> = {
   Python: {
     url: 'https://www.python.org',
     color: '#3776AB',
+    category: 'Backend',
+  },
+  Go: {
+    url: 'https://go.dev',
+    color: '#00ADD8',
     category: 'Backend',
   },
   JWT: { url: 'https://jwt.io', color: '#FB015B', category: 'Backend' },
