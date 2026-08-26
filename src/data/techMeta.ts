@@ -197,6 +197,41 @@ export const techMeta: Record<string, TechMeta> = {
     color: '#FF6F00',
     category: 'AI/ML',
   },
+  Keras: {
+    url: 'https://keras.io',
+    color: '#D00000',
+    category: 'AI/ML',
+  },
+  Komoran: {
+    url: 'https://github.com/shin285/KOMORAN',
+    color: '#4A90D9',
+    category: 'AI/ML',
+  },
+  NumPy: {
+    url: 'https://numpy.org',
+    color: '#013243',
+    category: 'AI/ML',
+  },
+  Pickle: {
+    url: 'https://docs.python.org/3/library/pickle.html',
+    color: '#4B8BBE',
+    category: 'AI/ML',
+  },
+  STT: {
+    url: 'https://en.wikipedia.org/wiki/Speech_recognition',
+    color: '#0EA5E9',
+    category: 'AI/ML',
+  },
+  TTS: {
+    url: 'https://en.wikipedia.org/wiki/Speech_synthesis',
+    color: '#8B5CF6',
+    category: 'AI/ML',
+  },
+  BeautifulSoup: {
+    url: 'https://www.crummy.com/software/BeautifulSoup/',
+    color: '#4F8A10',
+    category: 'Backend',
+  },
   Vercel: {
     url: 'https://vercel.com',
     color: '#111111',

@@ -379,18 +379,28 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
     role: '팀 리더',
     teamSize: 4,
     description:
-      '매천고등학교의 길 안내와 정보 제공을 담당하는 TensorFlow 기반 AI 챗봇.',
+      '상용 LLM 등장 이전, 텍스트 분류 챗봇의 ML 파이프라인을 구현한 학교 소개 챗봇 만들기 프로젝트',
     descriptionEn:
-      'A TensorFlow-based AI chatbot guiding routes and info around Maecheon High School',
+      'A school-guide chatbot project built before commercial LLMs existed, implementing the full ML pipeline for text classification from scratch.',
     detail:
-      '매천고등학교 교내 길 안내와 정보 제공을 담당하는 TensorFlow 기반 AI 챗봇입니다. 4인 팀의 팀 리더로 참여해 자연어 질의응답 모델 학습과 챗봇 대화 흐름 설계를 맡았습니다.',
-    stack: ['Python', 'TensorFlow'],
+      '매천고등학교 재학 시절인 2022년, 팀원 4명과 함께 학교 생활 안내를 위한 AI 챗봇 MaeChat을 제작했습니다. 당시는 ChatGPT 출시 이전으로 LLM API를 활용해 챗봇을 만드는 방식 자체가 존재하지 않았던 시기였기에, 텍스트 분류 모델을 직접 설계하고 학습시키는 방식을 택했습니다. 한국어는 영어와 달리 띄어쓰기만으로 형태소를 구분할 수 없는 언어적 특성을 고려해 Komoran 형태소 분석기로 문장에서 조사 등 불필요한 품사를 제거하고 의미 있는 어휘만 추출하는 전처리 로직을 직접 구현했습니다. 추출된 어휘로 사전을 구성하고 각 문장을 Bag-of-Words 벡터로 변환한 뒤, Dense(128)-Dropout-Dense(64)-Dropout-Softmax 구조의 신경망을 Keras로 설계해 SGD 옵티마이저로 200 epoch 학습시켜 사용자 발화의 의도(intent)를 분류하도록 했습니다. 학습된 모델은 chatbot_model.h5로 저장해 실서비스에서 재사용했습니다. 텍스트 기반 응답뿐 아니라 STT/TTS를 결합해 음성으로도 대화가 가능하도록 확장했으며, 정적인 답변만으로는 대응할 수 없는 날씨 정보는 실시간 크롤링을 붙여 처리했고, 급식 메뉴 조회 기능도 함께 구현해 학교 생활에 실질적으로 쓰일 수 있는 형태로 만들었습니다. 다만 Bag-of-Words 기반 분류는 단어의 유무만 반영할 뿐 어순과 문맥 정보를 반영하지 못한다는 한계가 있어, 부정 표현이 포함된 문장에서 의도가 뒤바뀌어 분류되는 경우가 발생했습니다. 또한 intents.json에 사전 정의된 패턴과 태그 범위 안에서만 응답이 가능한 폐쇄형 구조였기 때문에, 학습되지 않은 질문이 입력되면 가장 유사한 기존 태그로 잘못 분류되어 문맥에 맞지 않는 답변을 내놓는 경우가 있었습니다. 학습 데이터 역시 고교 프로젝트 규모로 수집되어 패턴 다양성이 제한적이었던 만큼, 표현이 조금만 달라져도 오분류 가능성이 높았던 구조였습니다.',
+    stack: [
+      'Python',
+      'Komoran',
+      'TensorFlow',
+      'Keras',
+      'NumPy',
+      'Pickle',
+      'STT',
+      'TTS',
+      'BeautifulSoup',
+    ],
     detailEn:
-      "A TensorFlow-based AI chatbot that guides routes and provides info around Maecheon High School. As the leader of a 4-person team, I handled training the natural-language Q&A model and designing the chatbot's conversation flow.",
+      "In 2022, while attending Maecheon High School, I built MaeChat, an AI chatbot for school life guidance, together with three teammates. This was before ChatGPT's release, at a time when building a chatbot using an LLM API simply wasn't an option — so I designed and trained a text classification model from scratch instead. Since Korean, unlike English, can't be tokenized by whitespace alone, I implemented a preprocessing pipeline using the Komoran morphological analyzer to strip out unnecessary parts of speech (such as particles) and extract meaningful vocabulary from each sentence. I built a vocabulary from the extracted words, converted each sentence into a Bag-of-Words vector, and designed a neural network in Keras with a Dense(128)-Dropout-Dense(64)-Dropout-Softmax architecture, training it for 200 epochs with an SGD optimizer to classify user utterances by intent. The trained model was saved as chatbot_model.h5 and reused in the live service. Beyond text-based responses, I integrated STT/TTS to enable voice-based conversation, added real-time weather crawling to handle information that static responses couldn't cover, and implemented a school lunch menu lookup feature — making the chatbot practically useful for everyday school life. That said, the Bag-of-Words approach only captures whether a word is present, not word order or context, which caused misclassification in sentences containing negation, where the intent was sometimes flipped entirely. The system was also a closed-domain structure that could only respond within the patterns and tags predefined in intents.json — any unlearned question would get misclassified into the closest existing tag, producing answers that didn't fit the actual question. The training data itself was collected at high-school project scale, so pattern diversity was limited, meaning even slight variations in phrasing could easily lead to misclassification.",
     contribution:
-      '4인 팀의 팀 리더로 자연어 질의응답 모델 학습과 챗봇 대화 흐름 설계를 맡았습니다.',
+      'LLM API가 존재하지 않던 시기에, 한국어 형태소 분석부터 벡터화·신경망 학습·배포까지 텍스트 분류 챗봇의 전체 ML 파이프라인을 직접 구현해 보았습니다.',
     contributionEn:
-      'As leader of a 4-person team, I handled training the natural-language Q&A model and designing the chatbot conversation flow.',
+      "Implemented the full ML pipeline for a text-classification chatbot — Korean morphological analysis, vectorization, neural network training, and deployment — entirely from scratch, at a time when LLM APIs didn't yet exist.",
     githubUrl: 'https://github.com/jiwonsudo/MaeChat',
   },
   {
