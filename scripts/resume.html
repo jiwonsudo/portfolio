@@ -151,26 +151,27 @@
         서비스를 배포까지 끝냅니다.
       </li>
       <li>
-        학교 서버 장애 상황에서 상태 확인 서비스를 직접 만들어 배포하고,
-        실사용자
-        <strong>1,088명</strong>을 확보한 뒤 역할이 끝난 시점에 스스로
-        종료했습니다.
+        학교 서버 장애 상황에서 상태 확인 서비스를 직접 만들어 배포해 실사용자
+        <strong>1,088명</strong>을 확보하고, 서버 정상화 시점에 종료했다가 2026년
+        장애 재발 때 Next.js·Go로 리빌드해 재오픈, 누적 <strong>1,245명</strong>을
+        확보했습니다.
       </li>
       <li>
         9인 팀 프론트엔드 리더, 4개 파트 합동 프로젝트의 웹 파트로 협업했고,
         코드 컨벤션·API 연동 등 팀의 공통 기반을 맡아왔습니다.
       </li>
       <li>
-        임베디드(드론 비행제어기)와 시뮬레이션(로켓 노즐 해석)까지 직접 구현해본
-        경험이 있어, 화면 너머의 데이터와 제약을 이해하고 설계합니다.
+        임베디드(드론 비행제어기), 시뮬레이션(로켓 노즐 해석), 텍스트 분류 챗봇의
+        ML 파이프라인까지 직접 구현해본 경험이 있어, 화면 너머의 데이터와 제약을
+        이해하고 설계합니다.
       </li>
     </ul>
 
     <h2>주요 성과</h2>
     <table>
       <tr>
-        <td>실사용자 1,088명</td>
-        <td>상명대학교 서버상태 확인 서비스 (2025)</td>
+        <td>실사용자 1,245명</td>
+        <td>스뮤온 · 상명대학교 서버상태 확인 서비스 (2025 · 2026 재오픈)</td>
       </tr>
       <tr>
         <td class="award">해커톤 1위</td>
@@ -220,12 +221,12 @@
 
     <div class="item">
       <div class="item-head">
-        <span class="item-title">상명대학교 서버상태 확인 — 1인 개발</span>
-        <span class="item-meta">2025.05</span>
+        <span class="item-title">스뮤온 — 상명대학교 서버상태 확인 · 1인 개발</span>
+        <span class="item-meta">2025.05 · 2026.08 재오픈</span>
       </div>
       <p class="stack">
-        React · Express.js · Styled-Components · Vercel · Render · Google
-        Analytics
+        Next.js · Go · Supabase · React · Express.js · Styled-Components · Vercel
+        · Render · Google Analytics
       </p>
       <ul>
         <li>
@@ -239,13 +240,15 @@
         </li>
         <li>
           Google Analytics로 이벤트·DAU/MAU를 추적, 커뮤니티(에브리타임) 홍보
-          글이 좋아요 100+로 Hot 게시물에 오르며
-          <strong>누적 사용자 1,088명</strong> 확보.
+          글이 좋아요 100+로 Hot 게시물에 오르며 <strong>누적 사용자 1,088명</strong>
+          확보 후 서버 정상화 시점에 종료.
         </li>
         <li>
-          서버 정상화로 사용량이 감소한 시점에 서비스를 종료. 장애 대응형
-          서비스는 리텐션 확보가 구조적으로 어렵다는 점을 지표로 확인한 것이
-          배움.
+          2026년 이캠퍼스 장애가 재발하자 리빌드해 재오픈 — 프론트엔드는 SEO에
+          유리한 <strong>Next.js</strong>로, 백엔드는 Render 프리티어의 콜드
+          스타트를 줄이기 위해 <strong>Go</strong>로 교체하고 디스코드 상태 알림을
+          추가. 구글 <strong>'상명대 서버' 검색 5위</strong> 노출, 누적
+          <strong>1,245명</strong> 확보.
         </li>
       </ul>
     </div>
@@ -305,6 +308,11 @@
           펌웨어, 200Hz PID 루프로 4개 모터 실시간 제어 및 비행시험.
         </li>
         <li>
+          <strong>매챗 학교 안내 챗봇</strong> (4인, 팀 리더) — 상용 LLM 이전,
+          Komoran 형태소 분석 → BoW 벡터화 → Keras 신경망 학습까지 텍스트 분류
+          챗봇의 ML 파이프라인을 직접 구현 (2022).
+        </li>
+        <li>
           <strong>직촌</strong> (6인, 프론트엔드) — 농수산물 직거래 쇼핑몰. 상품
           탐색부터 주문까지의 사용자 흐름 구현.
         </li>
@@ -319,6 +327,10 @@
 
     <h2>경력 · 활동</h2>
     <table>
+      <tr>
+        <td>2026.09 – 현재</td>
+        <td>GDGoC on Sangmyung · AI 팀</td>
+      </tr>
       <tr>
         <td>2026.02 – 2026.07</td>
         <td>Let's SOPT 38기 · 웹 파트</td>
@@ -353,7 +365,7 @@
     <table class="skills">
       <tr>
         <td>Core</td>
-        <td>React, TypeScript, JavaScript</td>
+        <td>React, Next.js, TypeScript, JavaScript</td>
       </tr>
       <tr>
         <td>Styling</td>
@@ -369,7 +381,7 @@
       </tr>
       <tr>
         <td>Backend · Infra</td>
-        <td>Express.js, Supabase, Django, MySQL, Vercel, Render</td>
+        <td>Go, Express.js, Supabase, Django, MySQL, Vercel, Render</td>
       </tr>
       <tr>
         <td>Tooling</td>
@@ -377,7 +389,7 @@
       </tr>
       <tr>
         <td>기타 경험</td>
-        <td>C++/ESP32 (임베디드), Python, Swift</td>
+        <td>C++/ESP32 (임베디드), Python (Keras·TensorFlow), Swift</td>
       </tr>
       <tr>
         <td>어학</td>
