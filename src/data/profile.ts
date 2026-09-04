@@ -105,8 +105,8 @@ export const credentials: Credential[] = [
 export const experiences: TimelineEntry[] = [
   {
     period: 'Sep 2026 – Present',
-    title: 'GDGoC on Sangmyung · AI 팀',
-    titleEn: 'GDGoC on Sangmyung · AI Team',
+    title: 'GDGoC on Sangmyung AI 팀 멤버',
+    titleEn: 'GDGoC on Sangmyung AI Team Member',
   },
   {
     period: 'Mar 2026 – Jul 2026',
