@@ -80,7 +80,7 @@ export default function AboutPage() {
         {/* 연락 / 외부 링크 — 이메일을 대표 CTA로 강조 */}
         <div className="fade-up fade-up-2 mt-7 flex flex-wrap items-center gap-2.5">
           <a
-            className="group inline-flex items-center gap-2 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-bold text-white transition-transform duration-200 hover:scale-105"
+            className="group inline-flex h-10 items-center justify-center gap-2 rounded-md bg-neutral-900 px-5 text-sm font-medium text-white shadow-sm transition-colors duration-200 hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
             href={`mailto:${profile.email}`}
           >
             <span aria-hidden>✉</span>
@@ -94,7 +94,7 @@ export default function AboutPage() {
           </a>
           {profile.resume ? (
             <a
-              className="rounded-full border border-neutral-300 bg-white/70 px-5 py-2.5 text-sm font-bold text-neutral-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
+              className="inline-flex h-10 items-center justify-center rounded-md border border-neutral-200 bg-white px-5 text-sm font-medium text-neutral-900 shadow-sm transition-colors duration-200 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
               href={profile.resume}
               onClick={() => trackEvent('resume-click-about', 'Resume · About')}
               rel="noreferrer"
@@ -105,7 +105,7 @@ export default function AboutPage() {
           ) : null}
           {socials.map((s) => (
             <a
-              className="rounded-full border border-neutral-300 bg-white/70 px-5 py-2 text-sm font-bold text-neutral-800 backdrop-blur transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-900 hover:shadow-md"
+              className="inline-flex h-10 items-center justify-center rounded-md border border-neutral-200 bg-white px-5 text-sm font-medium text-neutral-900 shadow-sm transition-colors duration-200 hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
               href={s.href}
               key={s.label}
               rel="noreferrer"
@@ -200,7 +200,7 @@ export default function AboutPage() {
                     if (!meta) {
                       return (
                         <span
-                          className="rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-xs font-bold text-neutral-500"
+                          className="inline-flex items-center rounded-md border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs font-medium text-neutral-600"
                           key={stack}
                         >
                           {stack}
@@ -210,7 +210,7 @@ export default function AboutPage() {
 
                     return (
                       <a
-                        className="tech-chip rounded-full px-4 py-2 text-xs font-bold"
+                        className="tech-chip rounded-md px-2.5 py-1 text-xs font-medium"
                         href={meta.url}
                         key={stack}
                         rel="noreferrer"
@@ -275,12 +275,11 @@ export default function AboutPage() {
           background-color: color-mix(in srgb, var(--c) 14%, white);
           color: color-mix(in srgb, var(--c) 48%, black);
           border: 1px solid color-mix(in srgb, var(--c) 22%, white);
-          transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+          transition: background-color 0.15s ease, border-color 0.15s ease;
         }
         .tech-chip:hover {
-          transform: translateY(-4px);
-          background-color: color-mix(in srgb, var(--c) 22%, white);
-          box-shadow: 0 10px 22px -6px color-mix(in srgb, var(--c) 45%, transparent);
+          background-color: color-mix(in srgb, var(--c) 20%, white);
+          border-color: color-mix(in srgb, var(--c) 34%, white);
         }
         .fade-up {
           animation: about-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;

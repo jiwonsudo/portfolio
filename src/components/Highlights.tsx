@@ -21,7 +21,7 @@ export default function Highlights({
     <div className={`grid ${grid} gap-3 md:gap-4 ${className}`}>
       {highlights.map((h, i) => (
         <Reveal
-          className={`rounded-2xl border border-neutral-200 bg-white/70 shadow-[0_10px_44px_rgba(80,70,160,0.1)] backdrop-blur ${lg ? 'p-6 md:p-7' : 'p-5'}`}
+          className={`rounded-xl border border-neutral-200 bg-white shadow-sm ${lg ? 'p-6 md:p-7' : 'p-5'}`}
           delay={i * 90}
           key={h.label}
         >

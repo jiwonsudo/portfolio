@@ -114,9 +114,9 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
     date: 'May 2025',
     role: '1인 개발',
     description:
-      '상명대학교 주요 웹서비스의 서버 상태 현황을 확인할 수 있는 웹서비스',
+      '상명대학교 주요 웹서비스의 서버 상태를 확인하고, AI로 복구시간을 예측하는 웹서비스',
     descriptionEn:
-      "A web service that allows you to check the server status of Sangmyung University's major web services",
+      'A web service that checks the server status of key Sangmyung University web services and predicts recovery times using AI',
     detail:
       "상명대 이캠퍼스 서버 장애로 학생들이 원인도 모른 채 빈 화면만 보던 상황에서, 상명대 주요 서비스의 접속 여부와 응답 속도를 실시간으로 보여주는 모니터링 서비스를 수일 만에 만들어 배포했습니다. 에브리타임 Hot 게시물에 오르며 누적 1,088명이 사용했고, 이캠퍼스 정상화 후 비용을 아끼려 서비스를 종료했다가 2026년 재장애 때 자발적으로 리디자인해 재오픈, 총 활성 사용자 1,245명을 확보했습니다. 기술 선택에는 매번 근거를 두었습니다. 검색 노출을 위해 CSR인 CRA를 SSR이 가능한 Next.js로 전면 이관하고 SEO·Lighthouse 최적화와 서치콘솔 등록을 병행해 구글 '상명대 서버' 검색 5위에 올렸습니다. 백엔드는 Render 프리티어 콜드스타트를 줄이려 Express에서 Go(표준 라이브러리)로 재작성하고, ISR·SSE·서버측 캐시로 첫 렌더 지연과 방문자 수에 따른 외부 트래픽 증가를 함께 잡았습니다. 알림은 사업자 인증이 필요한 카카오 대신 Discord 웹훅으로 구현했습니다. 최근에는 과거 장애 이력을 RAG로 검색·참조해 현재 오류의 지속 여부를 판정하는 AI 분석 기능을 추가했습니다. 요청당이 아닌 장애 확정 시점 1회 호출과 SQL 기반 retrieval로 유사 장애 이력을 근거 문서로 넣는 RAG 파이프라인, 구조화 출력으로 비용과 환각을 통제했고, 이력 백필 과정에서는 복원한 데이터의 58%가 CI 아티팩트임을 확인해 걸러냈습니다. 실제 문제에서 출발해 실사용자를 모으고, 인프라·SEO·AI까지 근거를 갖고 직접 설계·운영한 프로젝트입니다.",
     stack: [

@@ -16,22 +16,22 @@ export default function Nav() {
       {/* 글래스모피즘 바 — 반투명 + backdrop blur로 어떤 배경 위에서도 가독성 확보 */}
       <nav
         aria-label="주요 내비게이션"
-        className="mx-auto mt-3 flex max-w-6xl items-center justify-between gap-3 rounded-full border border-white/50 bg-white/60 px-4 py-3 shadow-lg shadow-black/5 backdrop-blur-md md:px-8"
+        className="mx-auto mt-3 flex max-w-6xl items-center justify-between gap-3 rounded-xl border border-white/50 bg-white/60 px-4 py-2.5 shadow-sm shadow-black/5 backdrop-blur-md md:px-8"
       >
         <NavLink
-          className="shrink-0 rounded-full text-base font-extrabold tracking-tight text-neutral-900 focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:outline-none md:text-lg"
+          className="shrink-0 rounded-md text-base font-semibold tracking-tight text-neutral-900 focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:outline-none md:text-lg"
           to="/"
         >
           Jiwon
         </NavLink>
-        <div className="flex items-center gap-3.5 text-[13px] font-bold sm:gap-5 sm:text-sm md:gap-8">
+        <div className="flex items-center gap-1 text-[13px] font-medium sm:gap-1.5 sm:text-sm">
           {links.map((link) => (
             <NavLink
               className={({ isActive }) =>
-                `rounded-full transition-colors focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                `rounded-md px-2.5 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 focus-visible:outline-none sm:px-3 ${
                   isActive
-                    ? 'text-neutral-900'
-                    : 'text-neutral-500 hover:text-neutral-900'
+                    ? 'bg-neutral-100 text-neutral-900'
+                    : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900'
                 }`
               }
               end={link.to === '/'}
@@ -45,13 +45,13 @@ export default function Nav() {
           {/* 언어 토글 */}
           <div
             aria-label="Language"
-            className="flex shrink-0 items-center gap-0.5 rounded-full border border-neutral-300 p-0.5 text-xs"
+            className="ml-1 flex shrink-0 items-center gap-0.5 rounded-md border border-neutral-200 bg-white p-0.5 text-xs"
             role="group"
           >
             {(['ko', 'en'] as Lang[]).map((l) => (
               <button
                 aria-pressed={lang === l}
-                className={`rounded-full px-2 py-1 font-bold transition-colors focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:outline-none sm:px-2.5 ${
+                className={`rounded-sm px-2 py-1 font-medium transition-colors focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:outline-none sm:px-2.5 ${
                   lang === l
                     ? 'bg-neutral-900 text-white'
                     : 'text-neutral-500 hover:text-neutral-900'

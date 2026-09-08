@@ -116,7 +116,7 @@ export default function ProjectsPage() {
 
               return (
                 <button
-                  className="rounded-full border px-4 py-2 text-xs font-bold transition-colors duration-200"
+                  className="inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
                   key={tab.key}
                   onClick={() => setFilter(tab.key)}
                   style={
@@ -143,10 +143,10 @@ export default function ProjectsPage() {
             })}
           </div>
 
-          <div className="flex gap-1 rounded-full border border-neutral-200 p-1">
+          <div className="flex gap-0.5 rounded-md border border-neutral-200 bg-white p-0.5">
             {(['newest', 'oldest'] as const).map((order) => (
               <button
-                className={`rounded-full px-3 py-1.5 text-xs font-bold transition-colors duration-200 ${
+                className={`rounded-sm px-3 py-1.5 text-xs font-medium transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 ${
                   sortOrder === order
                     ? 'bg-neutral-900 text-white'
                     : 'text-neutral-500 hover:text-neutral-900'
@@ -161,7 +161,7 @@ export default function ProjectsPage() {
           </div>
         </div>
 
-        <p className="mt-6 inline-flex items-center gap-2 rounded-full bg-neutral-100 px-4 py-2 text-xs font-medium text-neutral-600">
+        <p className="mt-6 inline-flex items-center gap-2 rounded-md bg-neutral-100 px-3 py-2 text-xs font-medium text-neutral-600">
           <span aria-hidden>👆</span>
           {t('projects.hint')}
         </p>

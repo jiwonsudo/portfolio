@@ -153,7 +153,7 @@ export default function ProjectModal({
                 const c = categoryMeta[cat].color;
                 return (
                   <span
-                    className="rounded-full px-2.5 py-1 text-[10px] font-extrabold"
+                    className="rounded-md px-2 py-0.5 text-[11px] font-medium"
                     key={cat}
                     style={{
                       backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
@@ -212,7 +212,7 @@ export default function ProjectModal({
             <div className="flex flex-wrap gap-1.5">
               {project.stack.map((item) => (
                 <span
-                  className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[10px] font-bold text-neutral-500"
+                  className="rounded-md border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[11px] font-medium text-neutral-600"
                   key={item}
                 >
                   {item}

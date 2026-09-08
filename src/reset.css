@@ -68,77 +68,9 @@ body {
   overflow-x: clip;
 }
 
-/* 홀로그램/포일 성과 배지 — 은은한 무지개빛이 흐르고 광택이 훑어 반짝인다 */
+/* 성과 배지 — 담백한 보조 배지 (shadcn secondary 톤) */
 .chrome-badge {
-  --holo: linear-gradient(
-    115deg,
-    #ff6b8b 0%,
-    #ffb26b 16%,
-    #ffe86b 32%,
-    #6bffb2 48%,
-    #6bb2ff 64%,
-    #b26bff 82%,
-    #ff6b8b 100%
-  );
-  --veil: rgba(255, 255, 255, 0.62);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  background-image: linear-gradient(var(--veil), var(--veil)), var(--holo);
-  background-size:
-    100% 100%,
-    280% 100%;
-  background-position:
-    0 0,
-    0 0;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 2px 8px rgba(0, 0, 0, 0.2);
-  animation: holo-shift 6s linear infinite;
-}
-/* 위를 훑고 지나가는 광택 */
-.chrome-badge::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 42%;
-  height: 100%;
-  background: linear-gradient(
-    100deg,
-    transparent,
-    rgba(255, 255, 255, 0.9),
-    transparent
-  );
-  transform: skewX(-20deg);
-  animation: chrome-shine 3.5s ease-in-out infinite;
-}
-/* 카드에 마우스를 올리면 무지개빛이 더 진하고 빠르게 */
-.group:hover .chrome-badge {
-  --veil: rgba(255, 255, 255, 0.3);
-  animation-duration: 2.4s;
-}
-@keyframes holo-shift {
-  to {
-    background-position:
-      0 0,
-      280% 0;
-  }
-}
-@keyframes chrome-shine {
-  0%,
-  55% {
-    left: -60%;
-  }
-  100% {
-    left: 130%;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .chrome-badge {
-    animation: none;
-  }
-  .chrome-badge::after {
-    display: none;
-  }
+  border: 1px solid #e5e5e5;
+  background: #f5f5f5;
+  color: #404040;
 }

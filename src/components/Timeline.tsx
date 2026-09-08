@@ -43,7 +43,7 @@ export default function Timeline({
               style={{ backgroundColor: accent }}
             />
             <span
-              className="inline-block rounded-full mb-2 px-2 py-1 text-[10px] font-bold"
+              className="mb-2 inline-flex items-center rounded-md px-2 py-0.5 text-[11px] font-medium"
               style={{
                 backgroundColor: `color-mix(in srgb, ${accent} 14%, white)`,
                 color: `color-mix(in srgb, ${accent} 48%, black)`,
@@ -57,7 +57,7 @@ export default function Timeline({
               </p>
               {entry.cert ? (
                 <button
-                  className="shrink-0 rounded-full border border-neutral-300 px-2 py-0.5 text-[10px] font-bold whitespace-nowrap text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+                  className="shrink-0 rounded-md border border-neutral-200 px-2 py-0.5 text-[10px] font-medium whitespace-nowrap text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
                   onClick={(e) => {
                     e.stopPropagation();
                     setOpenCert(entry.cert!);

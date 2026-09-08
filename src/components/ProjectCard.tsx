@@ -73,7 +73,7 @@ export default function ProjectCard({
             const c = categoryMeta[cat].color;
             return (
               <span
-                className="rounded-full px-2.5 py-1 text-[10px] font-extrabold"
+                className="rounded-md px-2 py-0.5 text-[11px] font-medium"
                 key={cat}
                 style={{
                   backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
@@ -89,12 +89,12 @@ export default function ProjectCard({
         </div>
         <div className="absolute top-3 right-3 flex flex-col items-end gap-1.5">
           {project.featured ? (
-            <span className="rounded-full bg-neutral-900/85 px-2.5 py-1 text-[10px] font-extrabold text-white backdrop-blur">
+            <span className="rounded-md bg-neutral-900/85 px-2 py-0.5 text-[11px] font-medium text-white backdrop-blur">
               <span className="text-[#facc15]">★</span> Featured
             </span>
           ) : null}
           {project.highlight ? (
-            <span className="chrome-badge rounded-full px-2.5 py-1 text-[10px] font-extrabold text-neutral-800">
+            <span className="chrome-badge rounded-md px-2 py-0.5 text-[11px] font-medium text-neutral-800">
               {lang === 'en'
                 ? (project.highlightEn ?? project.highlight)
                 : project.highlight}

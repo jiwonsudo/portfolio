@@ -173,15 +173,15 @@ export default function HomePage() {
             {t('home.sub')}
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 text-shadow-none">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3 text-shadow-none">
             <Link
-              className="inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-neutral-900 px-6 text-sm font-medium text-white shadow-sm transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
               to="/projects"
             >
               {t('home.viewProjects')}
             </Link>
             <Link
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-7 py-3 text-sm font-bold text-neutral-700 transition-colors hover:border-neutral-400"
+              className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white px-6 text-sm font-medium text-neutral-900 shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
               to="/about"
             >
               {t('home.about')}
@@ -191,7 +191,7 @@ export default function HomePage() {
           {/* 연락 / 외부 링크 — 이메일은 accent 톤의 작은 pill로 구분 */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-3 text-shadow-none">
             <a
-              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm font-bold text-neutral-700 transition-colors hover:border-neutral-300 hover:bg-neutral-100"
+              className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md bg-neutral-100 px-4 text-sm font-medium text-neutral-900 shadow-sm transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
               href={`mailto:${profile.email}`}
             >
               {t('contact.email')}
@@ -284,7 +284,7 @@ export default function HomePage() {
                     const c = categoryMeta[cat].color;
                     return (
                       <span
-                        className="rounded-full px-2.5 py-1 text-[10px] font-extrabold"
+                        className="rounded-md px-2 py-0.5 text-[11px] font-medium"
                         key={cat}
                         style={{
                           backgroundColor: `color-mix(in srgb, ${c} 16%, white)`,
@@ -298,12 +298,12 @@ export default function HomePage() {
                     );
                   })}
                   {hero.featured ? (
-                    <span className="rounded-full bg-neutral-900 px-2.5 py-1 text-[10px] font-extrabold text-white">
+                    <span className="rounded-md bg-neutral-900 px-2 py-0.5 text-[11px] font-medium text-white">
                       <span className="text-[#facc15]">★</span> Featured
                     </span>
                   ) : null}
                   {hero.highlight ? (
-                    <span className="chrome-badge rounded-full px-2.5 py-1 text-[10px] font-extrabold text-neutral-800">
+                    <span className="chrome-badge rounded-md px-2 py-0.5 text-[11px] font-medium text-neutral-800">
                       {lang === 'en'
                         ? (hero.highlightEn ?? hero.highlight)
                         : hero.highlight}
@@ -329,7 +329,7 @@ export default function HomePage() {
                 <div className="mt-5 flex flex-wrap gap-1.5">
                   {hero.stack.slice(0, 7).map((item) => (
                     <span
-                      className="rounded-full border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[10px] font-bold text-neutral-500"
+                      className="rounded-md border border-neutral-200 bg-neutral-50 px-2 py-0.5 text-[11px] font-medium text-neutral-600"
                       key={item}
                     >
                       {item}
@@ -338,7 +338,7 @@ export default function HomePage() {
                 </div>
 
                 <button
-                  className="mt-7 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-bold text-white transition-transform hover:scale-105"
+                  className="mt-7 inline-flex h-10 items-center justify-center gap-2 rounded-md px-6 text-sm font-medium text-white shadow-sm transition-[filter] hover:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                   onClick={() => setSelected(hero)}
                   style={{ backgroundColor: heroAccent }}
                   type="button"
@@ -361,7 +361,7 @@ export default function HomePage() {
 
             <div className="mt-14 text-center">
               <Link
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-300 px-7 py-3 text-sm font-bold text-neutral-800 transition-colors hover:border-neutral-900"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-neutral-200 bg-white px-6 text-sm font-medium text-neutral-900 shadow-sm transition-colors hover:bg-neutral-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
                 to="/projects"
               >
                 {t('home.allProjects')}
@@ -381,7 +381,7 @@ export default function HomePage() {
             {t('contact.ready')}
           </p>
           <a
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-neutral-900 px-7 py-3 text-sm font-bold text-white transition-transform hover:scale-105"
+            className="mt-8 inline-flex h-10 items-center justify-center gap-2 rounded-md bg-neutral-900 px-6 text-sm font-medium text-white shadow-sm transition-colors hover:bg-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
             href={`mailto:${profile.email}`}
           >
             {t('contact.email')}
