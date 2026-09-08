@@ -7,7 +7,12 @@ import Highlights from '../components/Highlights';
 import ProjectCard from '../components/ProjectCard';
 import ProjectModal from '../components/ProjectModal';
 import Reveal from '../components/Reveal';
-import { categoryMeta, projectList, roleLabel } from '../data/projects';
+import {
+  categoryMeta,
+  dateSortKey,
+  projectList,
+  roleLabel,
+} from '../data/projects';
 import { profile } from '../data/profile';
 import { useLang } from '../useLang';
 import type { Project } from '../types';
@@ -103,13 +108,18 @@ function Pipe({
   );
 }
 
-// featured만 노출 — data/projects.ts 배열에 적은 순서 그대로,
-// 히어로 1개 + 그리드 최대 3개 (featured가 부족해도 다른 프로젝트로 채우지 않음)
-const showcased = projectList
+// 히어로 1개 + 아래 그리드 3개.
+// featured 우선(배열 순서 그대로), 모자라면 최신순으로 채운다.
+const featured = projectList
   .filter((p) => p.featured)
   .sort((a, b) => projectList.indexOf(a) - projectList.indexOf(b));
-const hero = showcased[0];
-const rest = showcased.filter((p) => p !== hero).slice(0, 3);
+const hero = featured[0];
+const rest = [
+  ...featured.filter((p) => p !== hero),
+  ...projectList
+    .filter((p) => !p.featured)
+    .sort((a, b) => dateSortKey(b.date) - dateSortKey(a.date)),
+].slice(0, 3);
 
 export default function HomePage() {
   const { lang, t, team } = useLang();
