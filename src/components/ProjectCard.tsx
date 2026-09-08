@@ -6,9 +6,11 @@ import DeviceFrame from './DeviceFrame';
 export default function ProjectCard({
   project,
   onOpen,
+  priority = false,
 }: {
   project: Project;
   onOpen: () => void;
+  priority?: boolean;
 }) {
   const { lang, t, team } = useLang();
   const accent = categoryMeta[project.categories[0]].color;
@@ -35,6 +37,7 @@ export default function ProjectCard({
             <DeviceFrame
               alt={`${project.title} 미리보기`}
               objectPosition="top"
+              priority={priority}
               src={project.image}
               variant="mobile"
             />
@@ -45,6 +48,7 @@ export default function ProjectCard({
               alt={`${project.title} 미리보기`}
               className="w-[90%]"
               objectPosition="top"
+              priority={priority}
               src={project.image}
               variant="desktop"
             />
@@ -54,6 +58,7 @@ export default function ProjectCard({
             <DeviceFrame
               alt={`${project.title} 미리보기`}
               objectPosition="top"
+              priority={priority}
               src={project.image}
               variant="default"
             />

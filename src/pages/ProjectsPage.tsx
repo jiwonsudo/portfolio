@@ -178,6 +178,7 @@ export default function ProjectsPage() {
             >
               <ProjectCard
                 onOpen={() => setSelected(project)}
+                priority={i < 3}
                 project={project}
               />
             </Reveal>

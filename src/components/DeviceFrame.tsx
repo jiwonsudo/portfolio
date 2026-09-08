@@ -13,6 +13,8 @@ type DeviceFrameProps = {
   objectPosition?: 'top' | 'center';
   /** 프레임 기본 fit을 덮어쓴다 ('cover'면 화면 영역을 꽉 채워 기기 전체를 보여줌) */
   fit?: 'width' | 'cover';
+  /** 첫 화면에 보이는 카드 — lazy 대신 즉시 로드하고 우선순위를 올린다 */
+  priority?: boolean;
 };
 
 /**
@@ -47,7 +49,12 @@ export default function DeviceFrame({
   className = '',
   objectPosition = 'center',
   fit,
+  priority = false,
 }: DeviceFrameProps) {
+  const loadProps = priority
+    ? ({ loading: 'eager', fetchPriority: 'high', decoding: 'async' } as const)
+    : ({ loading: 'lazy', decoding: 'async' } as const);
+
   // 'default' — 목업 없이 이미지만 부모 영역을 채운다
   if (variant === 'default') {
     return (
@@ -58,7 +65,7 @@ export default function DeviceFrame({
             className={`h-full w-full object-cover ${
               objectPosition === 'top' ? 'object-top' : 'object-center'
             }`}
-            loading="lazy"
+            {...loadProps}
             src={src}
           />
         ) : null}
@@ -106,7 +113,7 @@ export default function DeviceFrame({
                     objectPosition === 'top' ? 'object-top' : 'object-center'
                   }`
             }
-            loading="lazy"
+            {...loadProps}
             src={src}
           />
         </div>
@@ -116,6 +123,8 @@ export default function DeviceFrame({
         alt=""
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full object-contain"
+        decoding="async"
+        {...(priority ? { fetchPriority: 'high' as const } : { loading: 'lazy' as const })}
         src={frame.src}
       />
     </div>
