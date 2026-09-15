@@ -106,6 +106,39 @@ function imagesFor(slug: string): Pick<Project, 'image' | 'gallery'> {
  */
 const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
   {
+    slug: 'gaptime',
+    title: 'everyFreeTime',
+    titleKo: '에브리프리타임 | 에타 시간표 자동 취합',
+    categories: ['Web', 'Backend'],
+    display: 'mobile',
+    date: 'Sep 2026',
+    role: '1인 개발',
+    description:
+      '에타 시간표 스크린샷만 올리면 팀플·스터디 가능한 시간을 자동으로 찾아주는 웹서비스',
+    descriptionEn:
+      "A web service that overlaps everyone's free time automatically — each member just uploads a screenshot of their Everytime timetable",
+    detail:
+      '팀플·스터디 시간을 잡을 때마다 단톡방에 시간표 캡처를 모아 한 명이 눈으로 대조하는 과정이 반복됐습니다. When2meet은 가능한 시간을 일일이 칠해야 하고, 그마저도 각자의 시간표는 이미 에타에 있는데 다시 옮겨 적는 셈이었습니다. 그래서 "에타 캡처를 올리면 자동으로 겹쳐주면 되지 않나"라는 발상으로, 방 링크 하나만 뿌리면 각자 자기 기기에서 시간표를 올리고 실시간으로 히트맵이 취합되는 서비스를 주말 사이에 만들어 배포했습니다. 핵심 통찰은 과목명을 읽을 필요가 없다는 것이었습니다. 필요한 정보는 "이 칸이 비었나"뿐이고, 에타 시간표는 빈 시간이 무채색·수업이 유채색으로 그려지므로 OCR 대신 픽셀의 채도(saturation)만 보면 됩니다. 이 방식은 과목 색상·라이트/다크모드·기기 차이에 자동으로 강건했고, 무거운 OCR 라이브러리 없이 브라우저에서 즉시 처리됩니다. 파스텔 색과 압축 열화까지 잡히도록 임계값을 0.035로 실측 튜닝하고, 셀 안쪽 70%를 11×11로 샘플링한 뒤 상·하위 20%를 버린 절사평균을 써서 글자·테두리 픽셀에 흔들리지 않게 했습니다. 반대로 자동화가 어려운 "격자가 이미지의 어느 픽셀 범위인가"는 완전 자동 검출을 고집하지 않고, 두 점을 끌어 모서리를 맞추는 반자동 캘리브레이션으로 우회해 안정성을 택했습니다. 이 설계는 프라이버시로도 이어집니다. 분석이 100% 클라이언트에서 끝나므로 원본 스크린샷은 브라우저를 벗어나지 않고, 서버로는 요일×시간 boolean 배열과 닉네임만 전송됩니다. 백엔드는 Supabase(Postgres)로, 로그인 없이 링크가 곧 접근 권한인 대신 보안 경계를 스키마에서 설계했습니다. 클라이언트의 테이블 직접 쓰기를 전부 revoke하고 SECURITY DEFINER RPC로만 쓰기를 허용했으며, 토큰·PIN은 salt+해시로만 저장하고 반복 실패 시 잠금을 걸었습니다. 방 생성·제출에 IP/전역 레이트리밋을 두고 7일 자동 만료로 저장량을 상수 범위로 유지했습니다. 실서비스를 운영하며 마주친 문제들도 직접 해결했습니다. 모바일 시간표 편집이 iOS 사파리에서 동작하지 않던 문제는 Pointer Events → Touch+Mouse 이중발화 제거 → <button> 대신 role="button" div 교체까지 단계적으로 원인을 좁혀 잡았고, 카톡 공유 미리보기는 크롤러가 JS를 실행하지 않으므로 /room/* 요청만 Vercel Edge Function이 가로채 방별 OG 태그를 주입하도록 했습니다. GA4가 사파리·OS 추적 차단에 걸리는 구간은 Vercel Analytics로 보완하고, "자동 인식 결과를 사용자가 몇 % 고쳤는지"와 인식 만족도를 익명 집계해 채도 임계값을 다시 튜닝하는 피드백 루프를 만들었습니다. 에브리타임 자유게시판에 올린 소개 글은 HOT 게시물에 올라 공감 14·스크랩 8을 받았고, "저 에이난데 이거 정말 좋더라고요" 같은 실사용 반응이 달렸습니다. 내 불편에서 출발해 알고리즘·보안·배포·계측까지 혼자 설계하고 운영한 프로젝트입니다.',
+    stack: [
+      'React',
+      'TypeScript',
+      'Supabase',
+      'Canvas API',
+      'Tailwind CSS',
+      'React Router',
+      'Vercel',
+      'Vercel Analytics',
+    ],
+    detailEn:
+      'Every time a group project or study group had to find a meeting time, the same ritual repeated: everyone drops timetable screenshots into the group chat and one person eyeballs them side by side. When2meet makes you paint every free slot by hand — re-entering a timetable that already exists in Everytime. So I built, over a weekend, a service around one idea: just upload the Everytime screenshot and let it overlap them for you. Share one room link, everyone uploads from their own phone, and the heatmap fills in live. The key insight was that course names never need to be read. The only thing that matters is whether a cell is empty, and Everytime renders free time as achromatic and classes as colored — so instead of OCR, it is enough to look at pixel saturation. That turned out to be automatically robust to course colors, light/dark mode and device differences, and it runs instantly in the browser with no heavy OCR library. I tuned the threshold to 0.035 against real screenshots so pastel fills and compression artifacts are still caught, and each cell is judged from an 11×11 sample of its inner 70%, trimmed of the top and bottom 20% so text and borders cannot skew it. For the part that genuinely resists automation — where exactly the grid sits in the image — I chose reliability over cleverness: a two-point drag calibration instead of full auto-detection. That design also buys privacy. Since analysis finishes entirely on the client, the original screenshot never leaves the browser; only a day×hour boolean array and a nickname are sent to the server. The back end is Supabase (Postgres): there are no accounts, so the link itself is the access boundary, and the security model lives in the schema. Direct client writes are revoked entirely and all writes go through SECURITY DEFINER RPCs; tokens and PINs are stored only as salted hashes with lockout after repeated failures; room creation and submissions are rate-limited per IP and globally, and 7-day auto-expiry keeps storage constant. Running it as a real service surfaced real bugs. Mobile grid editing silently failed on iOS Safari, which I narrowed step by step — Pointer Events, then removing duplicate touch/mouse firing, and finally replacing <button> with a role="button" div. KakaoTalk share previews needed server-rendered meta tags because crawlers do not run JS, so a Vercel Edge Function intercepts only /room/* and injects per-room OG tags. Where GA4 is blocked by Safari and OS-level tracking protection, Vercel Analytics fills the gap, and anonymous stats on how much of the auto-scan users corrected feed back into re-tuning the saturation threshold. The launch post on Everytime hit the Hot board with 14 likes and 8 bookmarks, drawing replies from actual users. A project born from my own annoyance, designed and operated solo across algorithm, security, deployment and instrumentation.',
+    demoUrl: 'https://www.everyfreetime.cloud',
+    demoLabel: 'Site',
+    githubUrl: 'https://github.com/jiwonsudo/gaptime',
+    featured: true,
+    highlight: '에타 HOT 게시물 등재',
+    highlightEn: 'Everytime Hot board',
+  },
+  {
     slug: 'smuon',
     title: 'SMUON',
     titleKo: '스뮤온 | 상명대학교 서버상태 확인',
@@ -137,6 +170,7 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
     demoLabel: 'Site',
     githubUrl: 'https://github.com/jiwonsudo/SMU-Server-Status-Viewer',
     featured: true,
+    hero: true,
     highlight: '활성 사용자 1,245명',
     highlightEn: '1,245 active users',
   },

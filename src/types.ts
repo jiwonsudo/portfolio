@@ -46,6 +46,8 @@ export type Project = {
   gallery?: string[];
   /** 대표작으로 강조할지 여부 */
   featured?: boolean;
+  /** 홈 히어로로 고정할 프로젝트 (featured 중 하나에만 지정. 없으면 featured 첫 번째) */
+  hero?: boolean;
   /** 카드에 크롬 배지로 강조할 대표 성과 (예: '실사용자 1,088명') */
   highlight?: string;
   highlightEn?: string;

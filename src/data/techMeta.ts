@@ -61,6 +61,11 @@ export const techMeta: Record<string, TechMeta> = {
     category: 'Frontend',
     dark: true,
   },
+  'Canvas API': {
+    url: 'https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API',
+    color: '#E44D26',
+    category: 'Frontend',
+  },
   'HTML/CSS': {
     url: 'https://developer.mozilla.org/en-US/docs/Web/HTML',
     color: '#E34F26',
@@ -244,6 +249,11 @@ export const techMeta: Record<string, TechMeta> = {
   },
   Vercel: {
     url: 'https://vercel.com',
+    color: '#111111',
+    category: 'Infra & Deploy',
+  },
+  'Vercel Analytics': {
+    url: 'https://vercel.com/docs/analytics',
     color: '#111111',
     category: 'Infra & Deploy',
   },

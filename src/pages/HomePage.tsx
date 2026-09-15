@@ -110,10 +110,11 @@ function Pipe({
 
 // 히어로 1개 + 아래 그리드 3개.
 // featured 우선(배열 순서 그대로), 모자라면 최신순으로 채운다.
+// 히어로는 hero 플래그로 고정한다 — 배열 순서(=노출 우선순위)와 독립적으로 두기 위함.
 const featured = projectList
   .filter((p) => p.featured)
   .sort((a, b) => projectList.indexOf(a) - projectList.indexOf(b));
-const hero = featured[0];
+const hero = featured.find((p) => p.hero) ?? featured[0];
 const rest = [
   ...featured.filter((p) => p !== hero),
   ...projectList
