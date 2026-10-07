@@ -41,8 +41,8 @@ export const profile = {
 export const highlights: Highlight[] = [
   {
     icon: '👥',
-    value: '1,245+',
-    valueEn: '1,245+',
+    value: '1,317+',
+    valueEn: '1,317+',
     label: '서비스 실사용자 확보',
     labelEn: 'Real users served',
     sub: '스뮤온 (상명대 서버상태 확인)',
