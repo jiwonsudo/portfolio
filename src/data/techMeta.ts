@@ -272,6 +272,16 @@ export const techMeta: Record<string, TechMeta> = {
     color: '#F38020',
     category: 'Infra & Deploy',
   },
+  'GitHub Actions': {
+    url: 'https://github.com/features/actions',
+    color: '#2088FF',
+    category: 'Infra & Deploy',
+  },
+  Vitest: {
+    url: 'https://vitest.dev',
+    color: '#6E9F18',
+    category: 'Tooling',
+  },
   Prettier: {
     url: 'https://prettier.io',
     color: '#F7B93E',
