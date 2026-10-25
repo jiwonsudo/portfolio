@@ -8,6 +8,7 @@ import {
   credentials,
   educations,
   experiences,
+  openSource,
   profile,
 } from '../data/profile';
 import { techCategoryOrder, techMeta } from '../data/techMeta';
@@ -143,6 +144,16 @@ export default function AboutPage() {
             label={t('section.awards')}
           />
         </div>
+
+        {openSource.length > 0 ? (
+          <div className="panel fade-up fade-up-3 mt-5">
+            <Timeline
+              accent="#10b981"
+              entries={openSource}
+              label={t('section.openSource')}
+            />
+          </div>
+        ) : null}
 
         {/* 어학 · 자격증 */}
         {credentials.length > 0 ? (

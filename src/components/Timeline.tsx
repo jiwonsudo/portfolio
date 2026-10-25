@@ -67,6 +67,16 @@ export default function Timeline({
                   {t('about.certConfirm')} ↗
                 </button>
               ) : null}
+              {entry.link ? (
+                <a
+                  className="shrink-0 rounded-md border border-neutral-200 px-2 py-0.5 text-[10px] font-medium whitespace-nowrap text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+                  href={entry.link.href}
+                  rel="noreferrer"
+                  target="_blank"
+                >
+                  {entry.link.label} ↗
+                </a>
+              ) : null}
             </div>
             <p className="pl-1.5 pt-1.5 text-xs text-neutral-500">
               {lang === 'en' ? entry.title : entry.titleEn}
