@@ -104,6 +104,13 @@ export const credentials: Credential[] = [
 
 export const experiences: TimelineEntry[] = [
   {
+    period: 'Oct 2026',
+    title:
+      'REA(MCP 기반 리버스엔지니어링 도구, 오픈소스) 기여: 분석 snapshot import 시 workflow 항목 개수 집계 버그 수정 및 회귀 테스트 추가 (morluto/rea#4428, merged)',
+    titleEn:
+      'Contributed to REA (open-source MCP reverse-engineering tool): fixed the workflow entry count on analysis snapshot import and added regression tests (morluto/rea#4428, merged)',
+  },
+  {
     period: 'Sep 2026 – Present',
     title: 'GDGoC on Sangmyung AI 팀 멤버',
     titleEn: 'GDGoC on Sangmyung AI Team Member',
