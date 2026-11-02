@@ -124,21 +124,20 @@ export default function AboutPage() {
         {/* 성과 하이라이트 */}
         <Highlights className="mt-12" />
 
-        <div className="fade-up fade-up-3 mt-16 grid gap-5 md:grid-cols-2">
-          <div className="panel">
-            <Timeline
-              accent="#6366f1"
-              entries={experiences}
-              label={t('section.experience')}
-            />
-          </div>
-          <div className="panel">
-            <Timeline
-              accent="#0ea5e9"
-              entries={educations}
-              label={t('section.education')}
-            />
-          </div>
+        <div className="panel fade-up fade-up-3 mt-16">
+          <Timeline
+            accent="#6366f1"
+            entries={experiences}
+            label={t('section.experience')}
+          />
+        </div>
+
+        <div className="panel fade-up fade-up-3 mt-5">
+          <Timeline
+            accent="#0ea5e9"
+            entries={educations}
+            label={t('section.education')}
+          />
         </div>
 
         <div className="panel fade-up fade-up-3 mt-5">
