@@ -6,8 +6,9 @@ import ProfilePhotosModal from './ProfilePhotosModal';
 /**
  * About 헤더 아바타.
  * - 대표 사진 1장을 원형으로 보여준다.
- * - 뒤에 겹쳐둔 설명 사진들이 주기적으로 "삭" 펼쳐졌다 접힌다(힌트).
- * - hover 시 부채꼴로 펼쳐 고정, 클릭하면 전체 사진 모달을 연다.
+ * - 뒤에 겹쳐둔 사진들이 주기적으로 아래쪽으로 "삭" 빠져나왔다 접힌다(힌트, md 이상).
+ *   이름 텍스트와 겹치지 않도록 오른쪽이 아닌 아래·왼쪽으로만 펼친다.
+ * - hover 시 아래로 펼쳐 고정, 클릭하면 전체 사진 모달을 연다.
  */
 export default function ProfileAvatar({ alt }: { alt: string }) {
   const { t } = useLang();
@@ -29,7 +30,7 @@ export default function ProfileAvatar({ alt }: { alt: string }) {
           ? previews.map((src, i) => (
               <span
                 aria-hidden
-                className={`pk pk${i + 1} absolute inset-0 overflow-hidden rounded-full ring-4 ring-white/80`}
+                className={`pk pk${i + 1} absolute hidden md:block inset-0 overflow-hidden rounded-full ring-4 ring-white/80`}
                 key={src}
               >
                 <img alt="" className="h-full w-full object-cover" src={src} />
@@ -78,29 +79,29 @@ export default function ProfileAvatar({ alt }: { alt: string }) {
         .pk2 { z-index: 2; animation: pk2 7s ease-in-out infinite; }
         .pk3 { z-index: 1; animation: pk3 7s ease-in-out infinite; }
 
-        /* 대부분 숨김(뒤에 겹침) → 잠깐 "삭" 펼침 → 다시 접힘. 오른쪽으로만 살짝. */
+        /* 대부분 숨김(뒤에 겹침) → 잠깐 "삭" 펼침 → 다시 접힘. 아래쪽으로만 살짝. */
         @keyframes pk1 {
           0%, 14%   { opacity: 0; transform: rotate(0) translate(0, 0) scale(0.92); }
-          22%, 30%  { opacity: 1; transform: rotate(6deg) translate(22%, -4%) scale(1); }
+          22%, 30%  { opacity: 1; transform: rotate(-4deg) translate(-4%, 22%) scale(1); }
           40%, 100% { opacity: 0; transform: rotate(0) translate(0, 0) scale(0.92); }
         }
         @keyframes pk2 {
           0%, 20%   { opacity: 0; transform: rotate(0) translate(0, 0) scale(0.92); }
-          28%, 36%  { opacity: 1; transform: rotate(11deg) translate(38%, -3%) scale(1); }
+          28%, 36%  { opacity: 1; transform: rotate(-8deg) translate(-8%, 38%) scale(1); }
           46%, 100% { opacity: 0; transform: rotate(0) translate(0, 0) scale(0.92); }
         }
         @keyframes pk3 {
           0%, 26%   { opacity: 0; transform: rotate(0) translate(0, 0) scale(0.92); }
-          34%, 42%  { opacity: 1; transform: rotate(15deg) translate(52%, 0) scale(1); }
+          34%, 42%  { opacity: 1; transform: rotate(-12deg) translate(-12%, 52%) scale(1); }
           52%, 100% { opacity: 0; transform: rotate(0) translate(0, 0) scale(0.92); }
         }
 
-        /* hover 시 오른쪽으로 부채꼴 펼쳐 고정 (터치 기기 제외 — 첫 탭 씹힘 방지) */
+        /* hover 시 아래로 펼쳐 고정 (터치 기기 제외 — 첫 탭 씹힘 방지) */
         @media (hover: hover) {
           .avatar-stack:hover .pk { animation: none; opacity: 1; }
-          .avatar-stack:hover .pk1 { transform: rotate(7deg) translate(28%, -6%) scale(1); }
-          .avatar-stack:hover .pk2 { transform: rotate(13deg) translate(48%, -4%) scale(1); }
-          .avatar-stack:hover .pk3 { transform: rotate(18deg) translate(66%, 0) scale(1); }
+          .avatar-stack:hover .pk1 { transform: rotate(-5deg) translate(-5%, 26%) scale(1); }
+          .avatar-stack:hover .pk2 { transform: rotate(-9deg) translate(-9%, 44%) scale(1); }
+          .avatar-stack:hover .pk3 { transform: rotate(-13deg) translate(-13%, 60%) scale(1); }
         }
 
         @media (prefers-reduced-motion: reduce) {

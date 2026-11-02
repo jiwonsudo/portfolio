@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import { trackEvent } from '../analytics';
 import Footer from '../components/Footer';
 import Highlights from '../components/Highlights';
+import ImageModal from '../components/ImageModal';
 import Timeline from '../components/Timeline';
+import type { Cert } from '../data/certImages';
 import { projectList } from '../data/projects';
 import {
   awards,
@@ -24,6 +27,7 @@ const socials = [
 
 export default function AboutPage() {
   const { lang, t } = useLang();
+  const [openCert, setOpenCert] = useState<Cert | null>(null);
 
   // Tech & Tools는 프로젝트에서 실제 쓰인 스택을 자동으로 모은다 (추가 시 자동 반영).
   const stacks = Array.from(
@@ -165,24 +169,44 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="flex flex-wrap gap-2.5">
-              {credentials.map((c) => (
-                <span
-                  className="inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white/70 px-4 py-2.5 backdrop-blur"
-                  key={`${c.name}-${c.detail ?? ''}`}
-                >
-                  <span className="text-[10px] font-bold text-[#be123c]">
-                    {lang === 'en' ? c.kindEn : c.kind}
-                  </span>
-                  <span className="text-sm font-extrabold text-neutral-900">
-                    {c.name}
-                  </span>
-                  {c.detail ? (
-                    <span className="text-sm font-bold text-neutral-500">
-                      {c.detail}
+              {credentials.map((c) => {
+                const chipClass =
+                  'inline-flex items-center gap-2 rounded-xl border border-neutral-200 bg-white/70 px-4 py-2.5 backdrop-blur';
+                const content = (
+                  <>
+                    <span className="text-[10px] font-bold text-[#be123c]">
+                      {lang === 'en' ? c.kindEn : c.kind}
                     </span>
-                  ) : null}
-                </span>
-              ))}
+                    <span className="text-sm font-extrabold text-neutral-900">
+                      {c.name}
+                    </span>
+                    {c.detail ? (
+                      <span className="text-sm font-bold text-neutral-500">
+                        {c.detail}
+                      </span>
+                    ) : null}
+                  </>
+                );
+                const key = `${c.name}-${c.detail ?? ''}`;
+
+                return c.cert ? (
+                  <button
+                    className={`${chipClass} cursor-pointer transition-colors hover:bg-neutral-100`}
+                    key={key}
+                    onClick={() => setOpenCert(c.cert!)}
+                    type="button"
+                  >
+                    {content}
+                    <span className="text-[10px] font-medium text-neutral-500">
+                      {t('about.certConfirm')} ↗
+                    </span>
+                  </button>
+                ) : (
+                  <span className={chipClass} key={key}>
+                    {content}
+                  </span>
+                );
+              })}
             </div>
           </div>
         ) : null}
@@ -239,6 +263,13 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {openCert ? (
+        <ImageModal
+          alt={openCert.name}
+          onClose={() => setOpenCert(null)}
+          src={openCert.src}
+        />
+      ) : null}
       <Footer />
 
       <style>{`

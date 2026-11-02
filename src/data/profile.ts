@@ -86,6 +86,8 @@ export type Credential = {
   name: string;
   /** 점수·등급 등 */
   detail?: string;
+  /** 증명서 이미지 (있으면 칩 클릭 시 확대 모달) */
+  cert?: Cert;
 };
 
 /**
@@ -94,7 +96,20 @@ export type Credential = {
  */
 export const credentials: Credential[] = [
   // 예시 — 실제 값으로 교체하세요
-  { kind: '어학', kindEn: 'Language', name: 'TOEIC', detail: '905' },
+  {
+    kind: '어학',
+    kindEn: 'Language',
+    name: 'TOEIC',
+    detail: '905',
+    cert: certs.find((c) => c.name.includes('TOEIC')),
+  },
+  {
+    kind: '자격증',
+    kindEn: 'Certificate',
+    name: 'Google Ads Search',
+    detail: '2026',
+    cert: certs.find((c) => c.name.includes('Google Ads')),
+  },
   // { kind: '어학', kindEn: 'Language', name: 'OPIc', detail: 'IM' },
   // {
   //   kind: '자격증',
