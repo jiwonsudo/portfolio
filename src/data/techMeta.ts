@@ -293,6 +293,41 @@ export const techMeta: Record<string, TechMeta> = {
     color: '#4B32C3',
     category: 'Tooling',
   },
+  STOMP: {
+    url: 'https://stomp-js.github.io',
+    color: '#4A5568',
+    category: 'Frontend',
+  },
+  'TanStack Start': {
+    url: 'https://tanstack.com/start',
+    color: '#0F766E',
+    category: 'Frontend',
+  },
+  'shadcn/ui': {
+    url: 'https://ui.shadcn.com',
+    color: '#18181B',
+    category: 'Frontend',
+  },
+  FastAPI: {
+    url: 'https://fastapi.tiangolo.com',
+    color: '#009688',
+    category: 'Backend',
+  },
+  Gemini: {
+    url: 'https://ai.google.dev',
+    color: '#4285F4',
+    category: 'AI/ML',
+  },
+  MSW: {
+    url: 'https://mswjs.io',
+    color: '#FF6A33',
+    category: 'Tooling',
+  },
+  Lovable: {
+    url: 'https://lovable.dev',
+    color: '#FF4F7B',
+    category: 'Tooling',
+  },
   'Google Analytics': {
     url: 'https://analytics.google.com',
     color: '#E37400',

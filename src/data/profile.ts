@@ -184,6 +184,11 @@ export const educations: TimelineEntry[] = [
 
 export const awards: TimelineEntry[] = [
   {
+    period: 'Nov 2026',
+    title: 'GDGoC on Sangmyung 팀 프로젝트 3위 (ASKeep)',
+    titleEn: 'GDGoC on Sangmyung Team Project · 3rd Place (ASKeep)',
+  },
+  {
     period: 'Sep 2024',
     title: '육군 제5회 철풍창업경진대회 우수상 (제5기갑여단 여단장상)',
     titleEn:
