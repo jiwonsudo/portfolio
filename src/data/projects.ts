@@ -49,6 +49,7 @@ export function dateSortKey(date: string): number {
 /** 역할(role) 한→영 매핑. 없는 값은 원문 그대로 노출. */
 const ROLE_EN: Record<string, string> = {
   '1인 개발': 'Solo project',
+  '기획·디자인·목업 프론트': 'Planning, design & mock-up front-end',
   프론트엔드: 'Front-end',
   '프론트엔드 리더': 'Front-end lead',
   '팀 리더': 'Team lead',
@@ -105,6 +106,83 @@ function imagesFor(slug: string): Pick<Project, 'image' | 'gallery'> {
  * 2. 아래 배열 맨 앞(최신순)에 메타데이터를 추가 (slug 는 폴더명과 동일하게)
  */
 const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
+  {
+    slug: 'ripple',
+    title: 'Ripple',
+    titleKo: '리플 | 근처 사람들과 여는 토픽 라운지',
+    categories: ['App'],
+    display: 'mobile',
+    date: 'Nov 2026',
+    role: '기획·디자인·목업 프론트',
+    description:
+      '지금 같은 장소(약 200m 안)에 있는 사람들과 닉네임만으로 가볍게 이야기하는 위치 기반 토픽 라운지 앱의 iOS 프로토타입',
+    descriptionEn:
+      'An iOS prototype of a location-based topic lounge where people in the same place (within ~200m) chat lightly, known only by nickname',
+    detail:
+      '"친구도, 완전한 익명의 타인도 아닌, 지금 여기 있는 사람들." 강의실·도서관·축제 현장처럼 같은 공간에 있지만 말 걸 계기가 없는 사람들을 잇는 위치 기반 토픽 라운지 앱 「리플」의 클릭 가능한 iOS 프로토타입입니다. 근처 약 200m 안에 있는 사람들을 \'ripplers\'라 부르고, 장소마다 열리는 라운지에서 대화를 나누다 같은 주제로 이야기하는 사람이 모이면 봇이 #뉴진스·#학식·#해커톤 같은 토픽 방을 제안합니다. 토픽 방은 장소를 떠나도 이어지기 때문에, "그 자리에서 시작된 대화"를 가볍게 계속할 수 있습니다. 저는 서비스 기획과 UI/UX 디자인, 그리고 실제처럼 동작하는 목업 프론트엔드를 맡았습니다. 기획 단계에서 가장 신경 쓴 것은 위치를 다루는 서비스의 신뢰였습니다. 정확한 위치는 근처에 누가 있는지 판단할 때만 쓰고 약 150m 크기의 구역 단위로만 저장하며, 다른 사람에게는 절대 노출하지 않는다는 원칙을 첫 화면(위치 권한 안내)부터 문장으로 약속했습니다. 상대에게는 닉네임만 보이도록 하되 휴대폰 1회 인증과 고정 사용자 ID에 신고·차단을 연결하고, 방마다 처음 입장한 닉네임을 유지해 익명성과 책임 사이의 균형을 잡았습니다. 닉네임은 한글·영문만 허용하고 초성·낱자·바코드형 닉네임과 금지어를 걸러내도록 규칙을 정했습니다. 디자인은 \'파동(ripple)\'이라는 이름을 화면 언어로 풀었습니다. 홈은 내 주변 ripplers가 튜브를 타고 헤엄치는 수영장으로, 실시간 물 표면 그래픽 위에서 캐릭터가 물결에 밀리고 벽에 튕기며, 화면을 터치하면 그 자리에서 파동이 퍼지고 바닥에 깔린 인원수가 물결에 굴절돼 보입니다. 라운지·토픽 방에 들어갈 때는 누른 버튼에서 화면을 덮는 파동 전환을, 라이트·다크 모드 변경 시에는 새 색이 퍼지는 파동을 적용했고, 머리·피부·아이웨어·수영복·튜브(플라밍고·돌고래)까지 고르는 캐릭터 꾸미기와 대화 화면 양옆에서 빼꼼 내다보는 캐릭터로 "닉네임만 보이지만 사람이 느껴지는" 분위기를 만들었습니다. 지난 방·참여한 방은 장소별로 모아 보고, 스와이프로 나가기·알림 끄기, 밀어서 답장하기, 길게 눌러 신고·차단하기, 스토리 크기 공유 카드 같은 모바일 인터랙션을 실제로 손에 잡히게 구현했습니다. 목업은 TanStack Start·React·Tailwind CSS·Framer Motion 기반으로 AI 빌더(Lovable)를 활용해 빠르게 반복하며, 아이폰 15(393×852) 기준 화면에서 매 수정마다 실제 동작을 확인했습니다. 방 기록·답장 규칙·닉네임/신고·차단·캐릭터 외형·수영장 움직임 같은 화면 밖 규칙은 순수 함수로 분리하고 Vitest 단위 테스트로 검증해, 기획 의도가 목업 안에서 어긋나지 않게 했습니다.',
+    detailEn:
+      '"Not friends, not total strangers — the people who are here right now." Ripple is a clickable iOS prototype of a location-based topic lounge that connects people who share a space — a lecture hall, a library, a festival — but have no reason to start talking. People within about 200m are called "ripplers"; each place opens a lounge, and when several people start talking about the same thing, a bot suggests a topic room such as #NewJeans, #CampusLunch or #Hackathon. Topic rooms persist after you leave the place, so a conversation that started there can keep going. I owned the product planning, the UI/UX design, and a mock-up front-end that behaves like the real thing. In planning, the thing I cared about most was trust, since the service handles location. The very first screen (the location-permission intro) promises in plain words that precise location is used only to decide who is nearby, stored only as a ~150m zone, and never shown to anyone. Others only ever see your nickname, but a one-time phone verification and a fixed user ID back reporting and blocking, and each room keeps the nickname you first entered with — a balance between anonymity and accountability. Nickname rules allow only Korean and Latin letters and reject lone jamo, barcode-like names and banned words. The design turns the name "ripple" into a visual language. Home is a swimming pool where nearby ripplers float on tubes over a real-time water surface: characters get pushed by waves and bounce off the walls, tapping the screen sends out a ripple from that spot, and the head count printed on the pool floor refracts through the water. Entering a lounge or topic room plays a wave transition that grows from the tapped button, switching light/dark mode spreads the new color as a wave, and a character editor (hair, skin, eyewear, swimsuit, flamingo/dolphin tubes) plus characters peeking in from both edges of the chat give a sense that there are people here even though only nicknames are shown. Past and joined rooms are grouped by place, with mobile interactions made tangible: swipe to leave or mute, swipe to reply, long-press to report or block, and a story-sized share card. The mock-up is built on TanStack Start, React, Tailwind CSS and Framer Motion, iterated quickly with an AI builder (Lovable) and checked on an iPhone 15 (393×852) viewport after every change. Rules that live outside the screen — room history, reply behaviour, nickname/report/block logic, character appearance and pool motion — are split into pure functions and covered by Vitest unit tests, so the intended behaviour does not drift inside the prototype.',
+    contribution:
+      '서비스 기획(컨셉·위치 프라이버시 원칙·닉네임/신고·차단 정책)과 UI/UX 디자인, 실제처럼 동작하는 iOS 목업 프론트엔드를 맡았습니다.',
+    contributionEn:
+      'I owned the product planning (concept, location-privacy principles, nickname/report/block policy), the UI/UX design, and the iOS mock-up front-end that behaves like the real app.',
+    stack: [
+      'React',
+      'TypeScript',
+      'TanStack Start',
+      'Tailwind CSS',
+      'Framer Motion',
+      'shadcn/ui',
+      'Vitest',
+      'Lovable',
+    ],
+    githubUrl: 'https://github.com/jiwonsudo/ripple-nearby-topic-lounges',
+  },
+  {
+    slug: 'askeep',
+    title: 'ASKeep',
+    titleKo: '애스킵 | 발표 질문 종합 & 지식 자산화',
+    categories: ['Web', 'AI'],
+    display: 'desktop',
+    date: 'Nov 2026',
+    context: 'GDGoC on Sangmyung',
+    role: '프론트엔드',
+    description:
+      '청중은 QR로 들어와 슬라이드를 보며 질문하고, AI가 발표 자료를 근거로 먼저 답하며, 끝난 세션은 요약과 함께 아카이브로 남는 발표 Q&A 서비스',
+    descriptionEn:
+      'A presentation Q&A service: the audience joins by QR and asks while viewing the slides, AI answers first from the deck, and finished sessions are archived with a summary',
+    detail:
+      '"Ask freely, Keep forever." 발표가 끝나면 질문은 손을 든 몇 명의 것으로만 끝나고, 좋은 질문과 답은 그 자리에서 휘발됩니다. ASKeep은 이 문제를 풀기 위해 GDGoC on Sangmyung 팀 프로젝트로 만든 프레젠테이션 질문 종합·지식 자산화 서비스로, 팀 프로젝트 3위를 수상했습니다. 발표자가 세션을 만들고 PDF 발표 자료를 올리면, 청중은 발표 화면의 QR·입장 코드·초대 링크로 들어와 각자 화면에서 슬라이드를 넘겨 보며 실명 또는 익명으로 질문합니다. 자료에 있는 내용은 AI가 발표 자료를 근거로 먼저 답하고 근거 슬라이드 페이지를 함께 보여 주며, 발표자 화면에는 \'나도 궁금해요\'를 많이 받은 질문부터 올라옵니다. 세션이 끝나면 AI 요약과 질문·답변이 아카이브에 남아 태그·키워드로 다시 찾아볼 수 있습니다. 백엔드는 Spring Boot·PostgreSQL, AI 서버는 FastAPI에서 multilingual-e5 임베딩과 Gemini로 RAG를 구성했습니다. 저는 프론트엔드를 전담해 초기 세팅부터 배포까지 혼자 맡았습니다. Vite·React 19·TypeScript·Tailwind CSS v4로 디자인 토큰과 공통 컴포넌트를 먼저 깔고, Swagger 명세에 맞춰 axios 클라이언트와 TanStack Query 훅을 도메인별(인증·세션·질문)로 나눠 서버 상태를 관리했습니다. 실시간성은 STOMP 웹소켓으로 세션 시작·종료 이벤트를 받아 캐시를 무효화하고, 질문 목록은 주기적 재조회로 보완했으며, 연결 시간 제한과 재연결 시 질문 다시 받기로 끊김에 대비했습니다. 발표 현장에서 쓰이는 서비스인 만큼 "처음 3초"를 중요하게 봤습니다. 발표 화면에 크게 띄우는 참여 QR과 입장 코드, 링크 공유를 만들고, 카톡 등으로 초대 링크를 보내면 크롤러가 JS를 실행하지 않아도 미리보기가 뜨도록 /join 경로만 별도 정적 HTML로 Vercel rewrite해 OG 태그를 주고 그대로 세션에 입장시키도록 했습니다. 시연 서버(Render 무료)가 잠들어 첫 요청이 1분 가까이 걸리는 문제는 4초 이상 응답이 없으면 "서버가 깨어나는 중"이라고 안내해 고장으로 오해하지 않게 했고, 로그인 토큰 만료를 감지해 안내와 함께 로그인 화면으로 돌려보내도록 했습니다. 이 밖에 AI 답변 마크다운 렌더링, 슬라이드 뷰어, 아카이브 검색·정렬·구조화 요약, 발표자료 원본 PDF 내려받기, 비로그인 랜딩·FAQ·개인정보처리방침, 모바일 최적화까지 구현했습니다. Vitest·Testing Library·MSW로 테스트 환경을 갖추고, GitHub Actions로 PR·main 푸시마다 lint·테스트·빌드를 확인하는 CI를 구성했으며, Vercel Analytics로 사용 지표를 확인했습니다. AI 서버 쪽에서도 업로드 경로 검증과 재처리 시 청크 중복 저장 방지를 직접 수정했습니다.',
+    detailEn:
+      '"Ask freely, Keep forever." When a talk ends, Q&A belongs to the few who raised their hands, and good questions and answers evaporate on the spot. ASKeep is a presentation Q&A and knowledge-archiving service built as a GDGoC on Sangmyung team project to fix that, and it won 3rd place among the team projects. A presenter creates a session and uploads the PDF deck; the audience joins via the QR code, entry code or invite link on the presentation screen, flips through the slides on their own device and asks questions under their name or anonymously. When the answer is in the deck, AI answers first, grounded in the slides, and shows the source pages; on the presenter\'s screen, the questions with the most "me too" votes rise to the top. When the session ends, an AI summary and the full Q&A are archived and searchable by tag and keyword. The back end is Spring Boot and PostgreSQL, and the AI server runs RAG on FastAPI with multilingual-e5 embeddings and Gemini. I owned the front end on my own, from initial setup to deployment. I started with design tokens and shared components on Vite, React 19, TypeScript and Tailwind CSS v4, then built an axios client and TanStack Query hooks split by domain (auth, session, question) against the Swagger spec to manage server state. For real-time behaviour, a STOMP WebSocket receives session start/end events and invalidates the cache, the question list is backed up by periodic refetching, and a connection timeout plus re-fetching questions on reconnect guard against drops. Since it is used live in a lecture hall, I focused on the first three seconds: a large join QR and entry code for the presentation screen, link sharing, and invite links that show a proper preview in messengers — /join is rewritten on Vercel to a separate static HTML with OG tags, since crawlers do not run JS, and drops the user straight into the session. The demo server (Render free tier) sleeps and can take nearly a minute on the first request, so after 4 seconds without a response the UI explains that the server is waking up instead of looking broken, and expired login tokens are detected and sent back to the login screen with a notice. I also built Markdown rendering for AI answers, the slide viewer, archive search/sort and structured summaries, original-PDF download, the logged-out landing page, FAQ and privacy policy, and mobile optimisation. I set up testing with Vitest, Testing Library and MSW, CI with GitHub Actions that runs lint, tests and build on every PR and push to main, and Vercel Analytics for usage. On the AI server I also fixed upload-path validation and duplicate chunk storage on reprocessing.',
+    contribution:
+      '프론트엔드를 전담해 초기 세팅·디자인 시스템·API 연동·실시간(STOMP)·QR/초대 링크 입장·아카이브·테스트·CI·Vercel 배포까지 혼자 구현했고, AI 서버의 업로드 경로 검증·청크 중복 방지도 수정했습니다.',
+    contributionEn:
+      'I owned the front end end-to-end — setup, design system, API integration, real-time (STOMP), QR/invite-link entry, archive, tests, CI and Vercel deployment — and also fixed upload-path validation and duplicate chunks on the AI server.',
+    stack: [
+      'React',
+      'TypeScript',
+      'TanStack Query',
+      'Axios',
+      'STOMP',
+      'Tailwind CSS',
+      'React Router',
+      'Vitest',
+      'MSW',
+      'GitHub Actions',
+      'Vercel',
+      'Vercel Analytics',
+      'Spring',
+      'FastAPI',
+      'Gemini',
+    ],
+    demoUrl: 'https://askeep.vercel.app',
+    demoLabel: 'Site',
+    githubUrl: 'https://github.com/jiwonsudo/askeep-frontend',
+    featured: true,
+    highlight: 'GDGoC 팀 프로젝트 3위',
+    highlightEn: 'GDGoC Team Project 3rd',
+  },
   {
     slug: 'gaptime',
     title: 'everyFreeTime',
