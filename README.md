@@ -1,8 +1,26 @@
+<div align="center">
+
 # 정지원 · Jiwon Jeong — Portfolio
 
-프론트엔드 개발자 정지원의 개인 포트폴리오. 한/영 이중 언어를 지원하며, 프로젝트·이력·이력서 PDF를 한곳에서 제공합니다.
+**만들고, 측정하고, 다듬습니다.**<br>
+프론트엔드 개발자 정지원의 개인 포트폴리오 · 한/영 이중 언어 지원
 
-**https://jiwonsudo.github.io/portfolio/**
+<img src="https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=white" alt="React">
+<img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+<img src="https://img.shields.io/badge/Vite-8-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite">
+<img src="https://img.shields.io/badge/Tailwind%20CSS-v4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+<img src="https://img.shields.io/badge/React%20Router-v7-CA4245?style=flat-square&logo=reactrouter&logoColor=white" alt="React Router">
+<img src="https://img.shields.io/badge/GitHub%20Pages-222222?style=flat-square&logo=githubpages&logoColor=white" alt="GitHub Pages">
+
+[**jiwonsudo.github.io/portfolio →**](https://jiwonsudo.github.io/portfolio/)
+
+<img src="docs/screenshots/home.webp" width="760" alt="포트폴리오 홈">
+
+</div>
+
+프로젝트·이력·이력서 PDF를 한곳에서 제공합니다.
+
+<p align="center"><img src="docs/screenshots/projects.webp" width="760" alt="프로젝트 목록"></p>
 
 ## Stack
 
