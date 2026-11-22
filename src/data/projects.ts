@@ -281,7 +281,6 @@ const projectsMeta: Omit<Project, 'image' | 'gallery'>[] = [
       '"A little bird brings you a daily bite of economics" — this is the pre-launch landing for Finch, a five-minutes-a-day economics learning app. Instead of the full app, it ships as a demo that introduces the concept and collects waitlist emails. Built with React and TypeScript, it stores the collected emails via Supabase, uses Framer Motion for smooth transitions, and wires screens with React Router. A service worker plus manifest make it an installable PWA, styled and shipped with Tailwind CSS, Vite and Vercel. About a month after release, analytics showed 90 visitors and 354 page views (~3.9 pages per visit) at a 40% bounce rate — modest in scale but with strong per-visitor engagement. A solo project.',
     demoUrl: 'https://finch-iota.vercel.app',
     githubUrl: 'https://github.com/jiwonsudo/finch',
-    featured: true,
     highlight: 'PV/Session 3.9회',
     highlightEn: '3.9 Pages / Session',
   },
